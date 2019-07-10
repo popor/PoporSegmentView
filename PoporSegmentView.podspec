@@ -8,18 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PoporSegmentView'
-  s.version          = '0.0.01'
-  s.summary          = 'A short description of PoporSegmentView.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.version          = '0.0.02'
+  s.summary          = '一组 UIButton 左右滑动,并且与外部的 UIScrollView 保持联动.'
 
   s.homepage         = 'https://github.com/popor/PoporSegmentView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
@@ -31,14 +21,6 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'Example/Classes/*.{h,m}'
-  
-  # s.resource_bundles = {
-  #   'PoporSegmentView' => ['PoporSegmentView/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'Masonry'
   s.dependency 'PoporUI/UIView'
   

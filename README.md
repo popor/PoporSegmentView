@@ -20,6 +20,11 @@ it, simply add the following line to your Podfile:
 pod 'PoporSegmentView'
 ```
 
+<p>
+<img src="https://github.com/popor/PoporSegmentView/blob/master/Example/screen/scrren1.png" width="100%" height="100%">
+
+</p>
+
 ## Author
 
 popor, 908891024@qq.com
