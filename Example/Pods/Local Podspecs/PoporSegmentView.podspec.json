@@ -1,6 +1,6 @@
 {
   "name": "PoporSegmentView",
-  "version": "0.1.0",
+  "version": "0.0.01",
   "summary": "A short description of PoporSegmentView.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/popor/PoporSegmentView",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/popor/PoporSegmentView.git",
-    "tag": "0.1.0"
+    "tag": "0.0.01"
   },
   "platforms": {
     "ios": "8.0"
