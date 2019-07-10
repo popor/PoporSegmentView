@@ -21,7 +21,7 @@ pod 'PoporSegmentView'
 ```
 
 <p>
-<img src="https://github.com/popor/PoporSegmentView/blob/master/Example/screen/scrren1.png" width="100%" height="100%">
+<img src="https://github.com/popor/PoporSegmentView/blob/master/Example/screen/scrren1.png" width="30%" height="30%">
 
 </p>
 
