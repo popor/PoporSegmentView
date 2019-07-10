@@ -1,0 +1,30 @@
+{
+  "name": "PoporSegmentView",
+  "version": "0.1.0",
+  "summary": "A short description of PoporSegmentView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/popor/PoporSegmentView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "popor": "908891024@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/popor/PoporSegmentView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "Example/Classes/*.{h,m}",
+  "dependencies": {
+    "Masonry": [
+
+    ],
+    "PoporUI/UIView": [
+
+    ]
+  }
+}

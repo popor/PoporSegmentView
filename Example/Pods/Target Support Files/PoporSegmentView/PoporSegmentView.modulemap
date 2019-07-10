@@ -1,0 +1,6 @@
+framework module PoporSegmentView {
+  umbrella header "PoporSegmentView-umbrella.h"
+
+  export *
+  module * { export * }
+}
