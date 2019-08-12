@@ -92,7 +92,7 @@
         [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
         [btn setTitleColor:self.btTitleSColor forState:UIControlStateSelected];
         // [btn setBackgroundImage:[UIImage imageFromColor:[UIColor grayColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor brownColor]];
+        // [btn setBackgroundColor:[UIColor brownColor]];
         
         [btn addTarget:self action:@selector(titleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         

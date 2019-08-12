@@ -2,7 +2,7 @@ PODS:
   - Masonry (1.1.0)
   - PoporMasonry (0.0.01):
     - Masonry
-  - PoporSegmentView (0.0.04):
+  - PoporSegmentView (0.0.05):
     - Masonry
     - PoporMasonry
     - PoporUI/UIView
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   PoporMasonry: 158a9af8b88b596707e6da0b1718a9dc20ddca36
-  PoporSegmentView: 2629212f2d7eb6b957ae89f4bb3d083d77b99e32
+  PoporSegmentView: 22fd036bab0d5f5202c10e3135048b0735676343
   PoporUI: d1d789956ad6548e7376a40742b491fd4c7bf3b1
 
 PODFILE CHECKSUM: 1f5c8390c09eea09ba95faee6ccfffb3c4fee386
