@@ -10,6 +10,7 @@
 
 #import <Masonry/Masonry.h>
 #import <PoporUI/UIView+Extension.h>
+#import <PoporMasonry/PoporMasonry.h>
 
 #define ANIMATION_DURATION 0.15
 
@@ -58,14 +59,29 @@
 }
 
 - (void)setUpHeaderView {
-    if (self.style == PoporSegmentViewTypeScrollView) {
-        UIScrollView * sv = [UIScrollView new];
-        sv.showsHorizontalScrollIndicator = NO;
-        sv.contentInset = UIEdgeInsetsMake(0, self.originX, 0, self.originX);
-        [self addSubview:sv];
-        
-        self.btSV = sv;
+    switch (self.style) {
+        case PoporSegmentViewTypeView : {
+            //平分宽度,不会自适应
+            break;
+        }
+        case PoporSegmentViewTypeViewAuto : {
+            // 自适应宽度,只在屏幕范围内
+            break;
+        }
+        case PoporSegmentViewTypeScrollView : {
+            // 自适应宽度,会滑动
+            UIScrollView * sv = [UIScrollView new];
+            sv.showsHorizontalScrollIndicator = NO;
+            sv.contentInset = UIEdgeInsetsMake(0, self.originX, 0, self.originX);
+            [self addSubview:sv];
+            
+            self.btSV = sv;
+            break;
+        }
+        default:
+            break;
     }
+    
     self.btArray = [NSMutableArray new];
     for (int i = 0; i < self.titleArray.count; i ++) {
         UIButton * btn      = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -75,15 +91,31 @@
         [btn setTitle:self.titleArray[i] forState:UIControlStateNormal];
         [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
         [btn setTitleColor:self.btTitleSColor forState:UIControlStateSelected];
-        
         // [btn setBackgroundImage:[UIImage imageFromColor:[UIColor grayColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
+        [btn setBackgroundColor:[UIColor brownColor]];
         
         [btn addTarget:self action:@selector(titleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        if (self.style == PoporSegmentViewTypeScrollView) {
-            [self.btSV addSubview:btn];
-        }else{
-            [self addSubview:btn];
+        
+        switch (self.style) {
+            case PoporSegmentViewTypeView : {
+                //平分宽度,不会自适应
+                [self addSubview:btn];
+                break;
+            }
+            case PoporSegmentViewTypeViewAuto : {
+                // 自适应宽度,只在屏幕范围内
+                [self addSubview:btn];
+                break;
+            }
+            case PoporSegmentViewTypeScrollView : {
+                // 自适应宽度,会滑动
+                [self.btSV addSubview:btn];
+                break;
+            }
+            default:
+                break;
         }
+        
         [self.btArray addObject:btn];
         if (i == 0) {
             btn.selected = YES;
@@ -96,96 +128,132 @@
         self.titleLineView = [[UIView alloc] init];
         self.titleLineView.backgroundColor = self.lineColor;
         
-        if (self.style == PoporSegmentViewTypeScrollView) {
-            [self.btSV addSubview:self.titleLineView];
-        }else{
-            [self addSubview:self.titleLineView];
+        switch (self.style) {
+            case PoporSegmentViewTypeView : {
+                //平分宽度,不会自适应
+                [self addSubview:self.titleLineView];
+                break;
+            }
+            case PoporSegmentViewTypeViewAuto : {
+                // 自适应宽度,只在屏幕范围内
+                [self addSubview:self.titleLineView];
+                break;
+            }
+            case PoporSegmentViewTypeScrollView : {
+                // 自适应宽度,会滑动
+                [self.btSV addSubview:self.titleLineView];
+                break;
+            }
+            default:
+                break;
         }
     }
 }
 
 - (void)layoutSubviewsCustome {
     // !!!: 没有做第二次判断,导致出错了
-    if (self.style == PoporSegmentViewTypeView) {
-        if (self.btArray.count == 1) {
-            [self.currentBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(UIEdgeInsetsMake(0, self.originX, 0, -self.originX));
-            }];
-        } else if (self.btArray.count == 2) {
-            UIButton * firstBT = self.btArray[0];
-            UIButton * lastBT  = self.btArray.lastObject;
-            [firstBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(0);
-                make.left.mas_equalTo(self.originX);
-                make.bottom.mas_equalTo(0);
+    switch (self.style) {
+        case PoporSegmentViewTypeView : {
+            //平分宽度,不会自适应
+            if (self.btArray.count == 1) {
+                [self.currentBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.mas_equalTo(UIEdgeInsetsMake(0, self.originX, 0, -self.originX));
+                }];
+            } else if (self.btArray.count == 2) {
+                UIButton * firstBT = self.btArray[0];
+                UIButton * lastBT  = self.btArray.lastObject;
+                [firstBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(0);
+                    make.left.mas_equalTo(self.originX);
+                    make.bottom.mas_equalTo(0);
+                    
+                }];
+                [lastBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(0);
+                    make.left.mas_equalTo(firstBT.mas_right);
+                    make.bottom.mas_equalTo(0);
+                    make.right.mas_equalTo(-self.originX);
+                    make.width.mas_equalTo(firstBT.mas_width);
+                }];
+            } else if (self.titleArray.count > 2) {
+                UIButton * firstBT = self.btArray[0];
+                UIButton * lastBT  = self.btArray.lastObject;
+                [firstBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(0);
+                    make.left.mas_equalTo(self.originX);
+                    make.bottom.mas_equalTo(0);
+                    
+                }];
                 
-            }];
-            [lastBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(0);
-                make.left.mas_equalTo(firstBT.mas_right);
-                make.bottom.mas_equalTo(0);
-                make.right.mas_equalTo(-self.originX);
-                make.width.mas_equalTo(firstBT.mas_width);
-            }];
-        } else if (self.titleArray.count > 2) {
-            UIButton * firstBT = self.btArray[0];
-            UIButton * lastBT  = self.btArray.lastObject;
-            [firstBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(0);
-                make.left.mas_equalTo(self.originX);
-                make.bottom.mas_equalTo(0);
+                UIButton * priorBT = firstBT;
+                UIButton * tempBT;
+                for (int i = 1; i<self.btArray.count - 1; i++) {
+                    tempBT = self.btArray[i];
+                    [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.top.mas_equalTo(0);
+                        make.left.mas_equalTo(priorBT.mas_right);
+                        make.bottom.mas_equalTo(0);
+                        //make.width.mas_equalTo(firstBT.mas_width);
+                    }];
+                    priorBT = tempBT;
+                }
                 
-            }];
-            
-            UIButton * priorBT = firstBT;
-            UIButton * tempBT;
-            for (int i = 1; i<self.btArray.count - 1; i++) {
-                tempBT = self.btArray[i];
-                [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                [lastBT mas_makeConstraints:^(MASConstraintMaker *make) {
                     make.top.mas_equalTo(0);
                     make.left.mas_equalTo(priorBT.mas_right);
                     make.bottom.mas_equalTo(0);
+                    make.right.mas_equalTo(-self.originX);
                     make.width.mas_equalTo(firstBT.mas_width);
                 }];
-                priorBT = tempBT;
+            }
+            break;
+        }
+        case PoporSegmentViewTypeViewAuto : {
+            // 自适应宽度,只在屏幕范围内
+            for (int i = 0; i<self.btArray.count; i++) {
+                UIButton * tempBT = self.btArray[i];
+                [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
+                }];
+            }
+            [self masSpacingHorizontallyWith:self.btArray];
+            
+            break;
+        }
+        case PoporSegmentViewTypeScrollView : {
+            // 自适应宽度,会滑动
+            if (self.btSV) {
+                [self.btSV mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+                }];
             }
             
-            [lastBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(0);
-                make.left.mas_equalTo(priorBT.mas_right);
-                make.bottom.mas_equalTo(0);
-                make.right.mas_equalTo(-self.originX);
-                make.width.mas_equalTo(firstBT.mas_width);
-            }];
-        }
-    }else{
-        if (self.btSV) {
-            [self.btSV mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-            }];
-        }
-        
-        UIButton * priorBT = self.btArray.firstObject;
-        [priorBT mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.centerY.mas_equalTo(0);
-        }];
-        
-        UIButton * oneBT;
-        for (int i = 1; i<self.btArray.count; i++) {
-            oneBT = self.btArray[i];
-            [oneBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(priorBT.mas_right). mas_offset(self.btSvGap);
+            UIButton * priorBT = self.btArray.firstObject;
+            [priorBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(0);
                 make.centerY.mas_equalTo(0);
             }];
-            priorBT = oneBT;
+            
+            UIButton * oneBT;
+            for (int i = 1; i<self.btArray.count; i++) {
+                oneBT = self.btArray[i];
+                [oneBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.mas_equalTo(priorBT.mas_right). mas_offset(self.btSvGap);
+                    make.centerY.mas_equalTo(0);
+                }];
+                priorBT = oneBT;
+            }
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.btSV.contentSize = CGSizeMake(CGRectGetMaxX(priorBT.frame), self.btSV.height);
+                //NSLog(@"_ self.btSV.contentSize: %@", NSStringFromCGSize(self.btSV.contentSize));
+                //NSLog(@"_ priorBT: %@", NSStringFromCGRect(priorBT.frame));
+            });
+            break;
         }
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            self.btSV.contentSize = CGSizeMake(CGRectGetMaxX(priorBT.frame), self.btSV.height);
-            //NSLog(@"_ self.btSV.contentSize: %@", NSStringFromCGSize(self.btSV.contentSize));
-            //NSLog(@"_ priorBT: %@", NSStringFromCGRect(priorBT.frame));
-        });
+        default:
+            break;
     }
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -289,8 +357,25 @@
         }else{
             self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);
         }
-        if (self.style == PoporSegmentViewTypeScrollView) {
-            [self.btSV scrollRectToVisible:self.titleLineView.frame animated:YES];
+        
+        switch (self.style) {
+            case PoporSegmentViewTypeView : {
+                //平分宽度,不会自适应
+                
+                break;
+            }
+            case PoporSegmentViewTypeViewAuto : {
+                // 自适应宽度,只在屏幕范围内
+                
+                break;
+            }
+            case PoporSegmentViewTypeScrollView : {
+                // 自适应宽度,会滑动
+                [self.btSV scrollRectToVisible:self.titleLineView.frame animated:YES];
+                break;
+            }
+            default:
+                break;
         }
         // NSLog(@"tag : %li - iv.center.x: %f", bt.tag, self.titleLineView.center.x);
     });

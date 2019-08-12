@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
-    PoporSegmentViewTypeView = 1,
-    PoporSegmentViewTypeScrollView,
+    PoporSegmentViewTypeView = 1, //平分宽度,不会自适应k
+    PoporSegmentViewTypeViewAuto, // 自适应宽度,只在屏幕范围内
+    PoporSegmentViewTypeScrollView, // 自适应宽度,会滑动
 };
 
 // 不针对可以滑动的情况.
