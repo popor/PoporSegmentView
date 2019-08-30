@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PoporSegmentView'
-  s.version          = '0.0.05'
+  s.version          = '1.01'
   s.summary          = '一组 UIButton 左右滑动,并且与外部的 UIScrollView 保持联动.'
 
   s.homepage         = 'https://github.com/popor/PoporSegmentView'

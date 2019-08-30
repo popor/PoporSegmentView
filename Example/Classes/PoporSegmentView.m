@@ -9,7 +9,7 @@
 #import "PoporSegmentView.h"
 
 #import <Masonry/Masonry.h>
-#import <PoporUI/UIView+Extension.h>
+#import <PoporUI/UIView+pExtension.h>
 #import <PoporMasonry/PoporMasonry.h>
 
 #define ANIMATION_DURATION 0.15
