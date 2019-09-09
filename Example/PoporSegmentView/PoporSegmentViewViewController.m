@@ -33,9 +33,9 @@
 }
 
 - (void)addinfoHSVs {
-    //self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4", @"Test55555", @"T6"];
+    self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4", @"Test55555", @"T6"];
     //self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4"];
-    self.titleArray = @[@"T0", @"Test1", @"T2"];
+    //self.titleArray = @[@"T0", @"Test1", @"T2"];
     //self.titleArray = @[@"T0", @"Test1"];
     //self.titleArray = @[@"T0"];
     if (!self.poporSV) {

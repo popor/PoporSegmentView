@@ -289,6 +289,8 @@
             if (moveS > 1) {
                 // NSLog(@"快速滑动, 需要重新计算self.currentPage, 防止滑动效果出错.");
                 self.currentPage = svOffX/scrollView.width;
+                self.currentBT = self.btArray[self.currentPage];
+                
                 [self scrollViewDidScroll:scrollView];
                 return;
             }
@@ -302,8 +304,7 @@
             {
                 //NSLog(@"设置下划线中心");
                 float moveMaxWidth = self.currentBT.center.x - nextBT.center.x;
-                float centerX = self.currentBT.center.x - moveMaxWidth*moveS;
-                
+                float centerX      = self.currentBT.center.x - moveMaxWidth*moveS;
                 self.titleLineView.center = CGPointMake(centerX, self.titleLineView.center.y);
             }
         }
