@@ -289,6 +289,7 @@
             if (moveS > 1) {
                 // NSLog(@"快速滑动, 需要重新计算self.currentPage, 防止滑动效果出错.");
                 self.currentPage = svOffX/scrollView.width;
+                [self.currentBT setSelected:NO];
                 self.currentBT = self.btArray[self.currentPage];
                 
                 [self scrollViewDidScroll:scrollView];
