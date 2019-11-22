@@ -2,7 +2,7 @@ PODS:
   - Masonry (1.1.0)
   - PoporMasonry (0.0.01):
     - Masonry
-  - PoporSegmentView (1.02):
+  - PoporSegmentView (1.03):
     - Masonry
     - PoporMasonry
     - PoporUI/UIView
@@ -12,7 +12,7 @@ DEPENDENCIES:
   - PoporSegmentView (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Masonry
     - PoporMasonry
     - PoporUI
@@ -24,9 +24,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   PoporMasonry: 158a9af8b88b596707e6da0b1718a9dc20ddca36
-  PoporSegmentView: 87506916791998391e9fbd633bcf1544de4ab5ed
+  PoporSegmentView: f983e66d9389a4210049ebe3b68d7074bcff15d7
   PoporUI: f6e8c424e4c59b489e9315e5116c9dd55f476df9
 
 PODFILE CHECKSUM: 1f5c8390c09eea09ba95faee6ccfffb3c4fee386
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

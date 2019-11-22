@@ -152,6 +152,9 @@
 
 - (void)layoutSubviewsCustome {
     // !!!: 没有做第二次判断,导致出错了
+    if (self.btArray.count == 0) {
+        return;
+    }
     switch (self.style) {
         case PoporSegmentViewTypeView : {
             //平分宽度,不会自适应
