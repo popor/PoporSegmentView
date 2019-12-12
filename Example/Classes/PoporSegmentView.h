@@ -58,6 +58,11 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
 
+/**
+ 允许外部控制lineView滑动到某个bt下面.
+ */
+- (void)updateLineViewToBT:(UIButton *)bt;
+
 @end
 
 NS_ASSUME_NONNULL_END

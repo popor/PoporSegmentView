@@ -25,6 +25,9 @@ pod 'PoporSegmentView'
 
 </p>
 
+v1.04
+开放接口:- (void)updateLineViewToBT:(UIButton *)bt 
+
 ## Author
 
 popor, 908891024@qq.com
