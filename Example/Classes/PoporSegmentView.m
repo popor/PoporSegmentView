@@ -46,6 +46,9 @@
         _lineWidthFlexible = NO;
         _lineWidthScale    = 0;
         
+        _titleLineHeight   = 2;
+        _titleLineBottom   = 2;
+        
         _btSvGap           = 20;
     }
     return self;
@@ -262,9 +265,9 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        self.titleLineView.height = 2;
+        self.titleLineView.height = self.titleLineHeight;
         self.titleLineView.width  = self.lineWidth;
-        self.titleLineView.bottom = self.height - 2;
+        self.titleLineView.bottom = self.height - self.titleLineBottom;
         
         if (self.lineWidthFlexible) {
             [self updateLineViewToBT:self.btArray.firstObject];

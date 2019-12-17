@@ -52,6 +52,9 @@
         hsv.lineWidthFlexible = YES;
         hsv.lineWidthScale    = 1.1;
         
+        hsv.titleLineBottom = 5;
+        hsv.titleLineHeight = 2;
+        
         hsv.backgroundColor = [UIColor whiteColor];
         
         [hsv setUI];

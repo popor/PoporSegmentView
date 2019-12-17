@@ -1,6 +1,6 @@
 {
   "name": "PoporSegmentView",
-  "version": "1.05",
+  "version": "1.06",
   "summary": "一组 UIButton 左右滑动,并且与外部的 UIScrollView 保持联动.",
   "homepage": "https://github.com/popor/PoporSegmentView",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/popor/PoporSegmentView.git",
-    "tag": "1.05"
+    "tag": "1.06"
   },
   "platforms": {
     "ios": "8.0"
