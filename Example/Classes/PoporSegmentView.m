@@ -40,6 +40,7 @@
         _btTitleNColor     = [UIColor lightGrayColor];
         _btTitleSColor     = [UIColor blackColor];
         _lineColor         = [UIColor blackColor];
+        _btTitleFont       = [UIFont systemFontOfSize:15];
         _originX           = 0;
         _lineWidth         = 20;
         _lineWidthFlexible = NO;
@@ -86,7 +87,7 @@
     for (int i = 0; i < self.titleArray.count; i ++) {
         UIButton * btn      = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag             = i;
-        btn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+        btn.titleLabel.font = self.btTitleFont;
         
         [btn setTitle:self.titleArray[i] forState:UIControlStateNormal];
         [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];

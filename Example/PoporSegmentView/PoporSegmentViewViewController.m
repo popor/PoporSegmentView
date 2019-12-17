@@ -47,6 +47,7 @@
         hsv.btTitleNColor = [UIColor lightGrayColor];
         hsv.btTitleSColor = [UIColor blackColor];
         hsv.lineColor     = [UIColor blackColor];
+        hsv.btTitleFont   = [UIFont systemFontOfSize:15];
         
         hsv.lineWidthFlexible = YES;
         hsv.lineWidthScale    = 1.1;

@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
 @property (nonatomic, weak  ) UIScrollView   * weakLinkSV; // 不可以为空
 
 @property (nonatomic        ) float          originX;// bt距离边界的最小间隔
+@property (nonatomic, strong) UIFont         * btTitleFont;
 @property (nonatomic, strong) UIColor        * btTitleNColor;
 @property (nonatomic, strong) UIColor        * btTitleSColor;
 @property (nonatomic, strong) UIColor        * lineColor;
