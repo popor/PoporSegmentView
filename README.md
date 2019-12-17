@@ -28,6 +28,10 @@ pod 'PoporSegmentView'
 v1.04
 开放接口:- (void)updateLineViewToBT:(UIButton *)bt 
 
+1.07
+增加: btTitleSFont
+设置btTitleSFont的话, titleArray最好不要太多, 否则滑动的时候UI.frame变化尺寸比较大影响效果
+
 ## Author
 
 popor, 908891024@qq.com

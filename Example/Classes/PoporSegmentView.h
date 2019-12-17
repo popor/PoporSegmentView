@@ -27,7 +27,14 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
 @property (nonatomic, weak  ) UIScrollView   * weakLinkSV; // 不可以为空
 
 @property (nonatomic        ) float          originX;// bt距离边界的最小间隔
-@property (nonatomic, strong) UIFont         * btTitleFont;
+
+@property (nonatomic, strong) UIFont         * btTitleNFont;
+
+/**
+设置btTitleSFont的话, titleArray最好不要太多, 否则滑动的时候UI.frame变化尺寸比较大影响效果
+*/
+@property (nonatomic, strong) UIFont         * btTitleSFont;
+
 @property (nonatomic, strong) UIColor        * btTitleNColor;
 @property (nonatomic, strong) UIColor        * btTitleSColor;
 @property (nonatomic, strong) UIColor        * lineColor;

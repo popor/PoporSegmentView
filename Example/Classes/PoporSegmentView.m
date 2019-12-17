@@ -40,7 +40,7 @@
         _btTitleNColor     = [UIColor lightGrayColor];
         _btTitleSColor     = [UIColor blackColor];
         _lineColor         = [UIColor blackColor];
-        _btTitleFont       = [UIFont systemFontOfSize:15];
+        _btTitleNFont      = [UIFont systemFontOfSize:15];
         _originX           = 0;
         _lineWidth         = 20;
         _lineWidthFlexible = NO;
@@ -90,7 +90,15 @@
     for (int i = 0; i < self.titleArray.count; i ++) {
         UIButton * btn      = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag             = i;
-        btn.titleLabel.font = self.btTitleFont;
+        if (i == 0) {
+            if (self.btTitleSFont) {
+                btn.titleLabel.font = self.btTitleSFont;
+            } else {
+                btn.titleLabel.font = self.btTitleNFont;
+            }
+        } else {
+            btn.titleLabel.font = self.btTitleNFont;
+        }
         
         [btn setTitle:self.titleArray[i] forState:UIControlStateNormal];
         [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
@@ -343,9 +351,18 @@
     if (self.currentBT == bt) {
         return;
     }
+    // old
     self.currentBT.selected = NO;
+    if (self.btTitleSFont) {
+        self.currentBT.titleLabel.font = self.btTitleNFont;
+    }
+    // new
     bt.selected             = YES;
     self.currentBT          = bt;
+    if (self.btTitleSFont) {
+        self.currentBT.titleLabel.font = self.btTitleSFont;
+    }
+    
     self.currentPage        = (int)bt.tag;
     // 加锁
     self.titleLineLock      = YES;
