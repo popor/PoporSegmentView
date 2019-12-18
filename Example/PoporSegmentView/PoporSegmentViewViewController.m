@@ -10,6 +10,7 @@
 #import "PoporSegmentView.h"
 
 #import <Masonry/Masonry.h>
+#import <PoporMasonry/PoporMasonry.h>
 
 @interface PoporSegmentViewViewController ()
 
@@ -36,7 +37,7 @@
     self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4", @"Test55555", @"T6"];
     //self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4"];
     //self.titleArray = @[@"T0", @"Test1", @"T2"];
-    self.titleArray = @[@"通知", @"私信"];
+    self.titleArray = @[@"TextA", @"TextB"];
     //self.titleArray = @[@"T0"];
     if (!self.poporSV) {
         PoporSegmentView * hsv = [[PoporSegmentView alloc] initWithStyle:PoporSegmentViewTypeViewAuto];
@@ -78,8 +79,9 @@
     
     if (!self.infoSV) {
         UIScrollView * sv = [UIScrollView new];
-        sv.backgroundColor = [UIColor lightGrayColor];
+        sv.backgroundColor = [UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1];
         sv.pagingEnabled = YES;
+        sv.showsHorizontalScrollIndicator = NO;
         
         [self.view addSubview:sv];
         self.infoSV = sv;
@@ -92,6 +94,29 @@
         
         make.right.mas_equalTo(0);
     }];
+    
+    NSMutableArray * lArray = [NSMutableArray new];
+    for (int i=0; i<self.titleArray.count; i++) {
+        UILabel * oneL = ({
+            UILabel * l = [UILabel new];
+            l.backgroundColor    = [UIColor clearColor];
+            l.font               = [UIFont systemFontOfSize:20];
+            l.textColor          = [UIColor blackColor];
+            l.textAlignment      = NSTextAlignmentCenter;
+            
+            [self.infoSV addSubview:l];
+            l;
+        });
+        oneL.text = self.titleArray[i];
+        [oneL mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(0);
+            make.width.mas_equalTo(self.view.frame.size.width);
+            make.height.mas_equalTo(oneL.font.pointSize+1);
+        }];
+        [lArray addObject:oneL];
+    }
+    [self.infoSV masSpacingHorizontallyWith:lArray];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         self.infoSV.contentSize = CGSizeMake(self.infoSV.frame.size.width*self.titleArray.count, self.infoSV.frame.size.height);
     });
