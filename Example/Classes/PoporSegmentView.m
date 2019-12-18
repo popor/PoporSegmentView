@@ -104,7 +104,11 @@
         [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
         [btn setTitleColor:self.btTitleSColor forState:UIControlStateSelected];
         // [btn setBackgroundImage:[UIImage imageFromColor:[UIColor grayColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
-        // [btn setBackgroundColor:[UIColor brownColor]];
+        //[btn setBackgroundColor:[UIColor brownColor]];
+        
+        if (!UIEdgeInsetsEqualToEdgeInsets(self.btContentEdgeInsets, UIEdgeInsetsZero)) {
+            btn.contentEdgeInsets = self.btContentEdgeInsets;
+        }
         
         [btn addTarget:self action:@selector(titleBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -137,23 +141,25 @@
         btn.titleLabel.numberOfLines =0;
     }
     if (!self.titleLineView) {
-        self.titleLineView = [[UIView alloc] init];
-        self.titleLineView.backgroundColor = self.lineColor;
+        UIView * oneV = [[UIView alloc] init];
+        self.titleLineView = oneV;
+        
+        oneV.backgroundColor = self.lineColor;
         
         switch (self.style) {
             case PoporSegmentViewTypeView : {
                 //平分宽度,不会自适应
-                [self addSubview:self.titleLineView];
+                [self addSubview:oneV];
                 break;
             }
             case PoporSegmentViewTypeViewAuto : {
                 // 自适应宽度,只在屏幕范围内
-                [self addSubview:self.titleLineView];
+                [self addSubview:oneV];
                 break;
             }
             case PoporSegmentViewTypeScrollView : {
                 // 自适应宽度,会滑动
-                [self.btSV addSubview:self.titleLineView];
+                [self.btSV addSubview:oneV];
                 break;
             }
             default:
@@ -208,7 +214,7 @@
                         make.top.mas_equalTo(0);
                         make.left.mas_equalTo(priorBT.mas_right);
                         make.bottom.mas_equalTo(0);
-                        //make.width.mas_equalTo(firstBT.mas_width);
+                        
                     }];
                     priorBT = tempBT;
                 }
@@ -313,7 +319,7 @@
             
             if (self.isLineWidthFlexible) {
                 //NSLog(@"设置动态下划线宽度");
-                float width = (1.0-moveS)*self.currentBT.titleLabel.width + moveS*nextBT.titleLabel.width;
+                float width = (1.0-moveS)*self.currentBT.width + moveS*nextBT.width;
                 self.titleLineView.width = width * self.lineWidthScale;
             }
             
@@ -378,7 +384,7 @@
 - (void)updateLineViewToBT:(UIButton *)bt {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isLineWidthFlexible) {
-            self.titleLineView.width  = bt.titleLabel.width*self.lineWidthScale;
+            self.titleLineView.width  = bt.width*self.lineWidthScale;
             self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);
         }else{
             self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);

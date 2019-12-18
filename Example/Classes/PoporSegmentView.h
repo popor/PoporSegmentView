@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
 @property (nonatomic, strong) UIColor        * btTitleSColor;
 @property (nonatomic, strong) UIColor        * lineColor;
 
+@property (nonatomic        ) UIEdgeInsets   btContentEdgeInsets;
+
 // 由于采用的绝对布局,所以不是和bt的相对参数
 @property (nonatomic        ) int            titleLineBottom; // lineBottom之间的间距: 默认2
 @property (nonatomic        ) int            titleLineHeight; // 2

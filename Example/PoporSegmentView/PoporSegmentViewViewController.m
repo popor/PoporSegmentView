@@ -49,8 +49,10 @@
         hsv.btTitleSColor = [UIColor blackColor];
         hsv.lineColor     = [UIColor blackColor];
         
-        hsv.btTitleNFont   = [UIFont systemFontOfSize:18];
-        hsv.btTitleSFont   = [UIFont boldSystemFontOfSize:18];
+        hsv.btTitleNFont  = [UIFont systemFontOfSize:18];
+        hsv.btTitleSFont  = [UIFont boldSystemFontOfSize:18];
+        
+        hsv.btContentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 20);
         
         hsv.lineWidthFlexible = YES;
         hsv.lineWidthScale    = 1.1;
