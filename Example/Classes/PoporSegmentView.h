@@ -16,6 +16,12 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
     PoporSegmentViewTypeScrollView, // 自适应宽度,会滑动
 };
 
+typedef NS_ENUM(NSInteger, PoporSegmentViewLineType) {
+    PoporSegmentViewLineType3 = 1, //平分宽度,不会自适应k
+    PoporSegmentViewLineTypeScale, // 自适应宽度,只在屏幕范围内
+    PoporSegmentViewLineTypeInsert, // 自适应宽度,会滑动
+};
+
 // 不针对可以滑动的情况.
 @interface PoporSegmentView : UIView <UIScrollViewDelegate>
 
@@ -43,17 +49,19 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewType) {
 
 // 由于采用的绝对布局,所以不是和bt的相对参数
 @property (nonatomic        ) int            titleLineBottom; // lineBottom之间的间距: 默认2
-@property (nonatomic        ) int            titleLineHeight; // 2
+@property (nonatomic        ) int            titleLineHeight; // 默认2
+
+// titleLine 固定宽度
 @property (nonatomic        ) int            lineWidth;
 
+// titleLine 自适应宽度
 // 假如line width 根据文字内容变化的话
 @property (nonatomic, getter=isLineWidthFlexible) BOOL lineWidthFlexible;
 
 // 假如lineWidthFlexible=yes,那么lineWidth相对于bt.titleLable.width的比例.
 @property (nonatomic        ) float          lineWidthScale;
 
-// scrollview 模式下,bt的间隔,默认为20.
-@property (nonatomic        ) float          btSvGap;
+//@property (nonatomic) float btSvGap; // 不再使用,通过btContentEdgeInsets和originX决定, (scrollview 模式下,bt的间隔,默认为20)
 
 // !!!: UI部分,自持部分
 // 假如style == PoporSegmentViewTypeScrollView的话,那么bt位于btSV上面.

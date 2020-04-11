@@ -9,7 +9,6 @@
 #import "PoporSegmentView.h"
 
 #import <Masonry/Masonry.h>
-#import <PoporUI/UIView+pExtension.h>
 #import <PoporMasonry/PoporMasonry.h>
 
 #define ANIMATION_DURATION 0.15
@@ -49,7 +48,6 @@
         _titleLineHeight   = 2;
         _titleLineBottom   = 2;
         
-        _btSvGap           = 20;
     }
     return self;
 }
@@ -260,14 +258,14 @@
             for (int i = 1; i<self.btArray.count; i++) {
                 oneBT = self.btArray[i];
                 [oneBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.left.mas_equalTo(priorBT.mas_right). mas_offset(self.btSvGap);
+                    make.left.mas_equalTo(priorBT.mas_right);
                     make.centerY.mas_equalTo(0);
                 }];
                 priorBT = oneBT;
             }
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                self.btSV.contentSize = CGSizeMake(CGRectGetMaxX(priorBT.frame), self.btSV.height);
+                self.btSV.contentSize = CGSizeMake(CGRectGetMaxX(priorBT.frame), self.btSV.frame.size.height);
                 //NSLog(@"_ self.btSV.contentSize: %@", NSStringFromCGSize(self.btSV.contentSize));
                 //NSLog(@"_ priorBT: %@", NSStringFromCGRect(priorBT.frame));
             });
@@ -279,9 +277,11 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
-        self.titleLineView.height = self.titleLineHeight;
-        self.titleLineView.width  = self.lineWidth;
-        self.titleLineView.bottom = self.height - self.titleLineBottom;
+        float height = self.titleLineHeight;
+        float width  = self.lineWidth;
+        float y      = self.frame.size.height - self.titleLineBottom - height;
+        
+        self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, y, width, height);
         
         if (self.lineWidthFlexible) {
             [self updateLineViewToBT:self.btArray.firstObject];
@@ -300,7 +300,7 @@
         self.btArray.count > 0) {
         
         float svOffX    = scrollView.contentOffset.x;
-        float moveScale = svOffX/scrollView.width;
+        float moveScale = svOffX/scrollView.frame.size.width;
         int nextPage    = moveScale >= self.currentPage ? self.currentPage+1:self.currentPage-1;
         
         if (0 <= nextPage && nextPage < self.titleArray.count) {
@@ -309,7 +309,7 @@
             float moveS = fabsf(moveScale - self.currentPage);
             if (moveS > 1) {
                 // NSLog(@"快速滑动, 需要重新计算self.currentPage, 防止滑动效果出错.");
-                self.currentPage = svOffX/scrollView.width;
+                self.currentPage = svOffX/scrollView.frame.size.width;
                 [self.currentBT setSelected:NO];
                 self.currentBT = self.btArray[self.currentPage];
                 
@@ -319,8 +319,9 @@
             
             if (self.isLineWidthFlexible) {
                 //NSLog(@"设置动态下划线宽度");
-                float width = (1.0-moveS)*self.currentBT.width + moveS*nextBT.width;
-                self.titleLineView.width = width * self.lineWidthScale;
+                float width = (1.0-moveS)*self.currentBT.frame.size.width + moveS*nextBT.frame.size.width;
+                CGFloat width_new = width * self.lineWidthScale;
+                self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width_new, self.titleLineView.frame.size.height);
             }
             
             {
@@ -337,7 +338,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView==self.weakLinkSV) {
         float svOffX     = scrollView.contentOffset.x;
-        self.currentPage = svOffX/scrollView.width;
+        self.currentPage = svOffX/scrollView.frame.size.width;
         
         // 滑动结束异常处理
         if (self.currentPage >=0 && self.currentPage<self.btArray.count) {
@@ -375,7 +376,7 @@
     [self updateLineViewToBT:self.currentBT];
     
     [UIView animateWithDuration:0.35 delay:0 usingSpringWithDamping:1 initialSpringVelocity:12 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.weakLinkSV.contentOffset = CGPointMake(self.weakLinkSV.width * bt.tag, 0);
+        self.weakLinkSV.contentOffset = CGPointMake(self.weakLinkSV.frame.size.width * bt.tag, 0);
     } completion:^(BOOL finished) {
         self.titleLineLock = NO;
     }];
@@ -384,7 +385,8 @@
 - (void)updateLineViewToBT:(UIButton *)bt {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isLineWidthFlexible) {
-            self.titleLineView.width  = bt.width*self.lineWidthScale;
+            CGFloat width = bt.frame.size.width*self.lineWidthScale;
+            self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width, self.titleLineView.frame.size.height);
             self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);
         }else{
             self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);

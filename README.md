@@ -32,6 +32,9 @@ v1.04
 增加: btTitleSFont
 设置btTitleSFont的话, titleArray最好不要太多, 否则滑动的时候UI.frame变化尺寸比较大影响效果
 
+1.08
+移除了 PoporUI 的依赖  
+
 ## Author
 
 popor, 908891024@qq.com
