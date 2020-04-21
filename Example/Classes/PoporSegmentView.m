@@ -84,7 +84,7 @@
             break;
     }
     
-    self.btArray = [NSMutableArray new];
+    self.btArray = [NSMutableArray<UIButton *> new];
     for (int i = 0; i < self.titleArray.count; i ++) {
         UIButton * btn      = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.tag             = i;
@@ -264,6 +264,7 @@
                 priorBT = oneBT;
             }
             
+            // 这个仅仅是更新 contentSize, 不太影响其他系统UI.
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 self.btSV.contentSize = CGSizeMake(CGRectGetMaxX(priorBT.frame), self.btSV.frame.size.height);
                 //NSLog(@"_ self.btSV.contentSize: %@", NSStringFromCGSize(self.btSV.contentSize));
@@ -283,7 +284,7 @@
         
         self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, y, width, height);
         
-        if (self.lineWidthFlexible) {
+        if (self.lineWidthFlexible || self.currentBT == self.btArray.firstObject) {
             [self updateLineViewToBT:self.btArray.firstObject];
         }
     });
@@ -383,6 +384,10 @@
 }
 
 - (void)updateLineViewToBT:(UIButton *)bt {
+    self.currentBT.selected = NO;
+    self.currentBT = bt;
+    self.currentBT.selected = YES;
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isLineWidthFlexible) {
             CGFloat width = bt.frame.size.width*self.lineWidthScale;

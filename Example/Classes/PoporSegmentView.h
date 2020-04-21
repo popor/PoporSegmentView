@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewLineType) {
 // 与之联动的外部UISrollView.
 @property (nonatomic, weak  ) UIScrollView   * weakLinkSV; // 不可以为空
 
-@property (nonatomic        ) float          originX;// bt距离边界的最小间隔
+@property (nonatomic        ) CGFloat        originX;// bt距离边界的最小间隔
 
 @property (nonatomic, strong) UIFont         * btTitleNFont;
 
@@ -48,28 +48,28 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewLineType) {
 @property (nonatomic        ) UIEdgeInsets   btContentEdgeInsets;
 
 // 由于采用的绝对布局,所以不是和bt的相对参数
-@property (nonatomic        ) int            titleLineBottom; // lineBottom之间的间距: 默认2
-@property (nonatomic        ) int            titleLineHeight; // 默认2
+@property (nonatomic        ) CGFloat        titleLineBottom; // lineBottom之间的间距: 默认2
+@property (nonatomic        ) CGFloat        titleLineHeight; // 默认2
 
 // titleLine 固定宽度
-@property (nonatomic        ) int            lineWidth;
+@property (nonatomic        ) CGFloat        lineWidth;
 
 // titleLine 自适应宽度
 // 假如line width 根据文字内容变化的话
 @property (nonatomic, getter=isLineWidthFlexible) BOOL lineWidthFlexible;
 
 // 假如lineWidthFlexible=yes,那么lineWidth相对于bt.titleLable.width的比例.
-@property (nonatomic        ) float          lineWidthScale;
+@property (nonatomic        ) CGFloat        lineWidthScale;
 
 //@property (nonatomic) float btSvGap; // 不再使用,通过btContentEdgeInsets和originX决定, (scrollview 模式下,bt的间隔,默认为20)
 
 // !!!: UI部分,自持部分
 // 假如style == PoporSegmentViewTypeScrollView的话,那么bt位于btSV上面.
 @property (nonatomic, strong) UIScrollView   * btSV;
-@property (nonatomic, strong) NSMutableArray * btArray;
+@property (nonatomic, strong) NSMutableArray<UIButton *> * btArray;
 @property (nonatomic, weak  ) UIButton       * currentBT;
 @property (nonatomic, strong) UIView         * titleLineView;
-@property (nonatomic        ) int            currentPage;
+@property (nonatomic        ) NSInteger      currentPage;
 
 - (id)initWithStyle:(PoporSegmentViewType)style NS_DESIGNATED_INITIALIZER;
 

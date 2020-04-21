@@ -36,11 +36,11 @@
 - (void)addinfoHSVs {
     self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4", @"Test55555", @"T6"];
     //self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4"];
-    //self.titleArray = @[@"T0", @"Test1", @"T2"];
-    self.titleArray = @[@"TextA", @"TextB"];
+    self.titleArray = @[@"T0", @"Test1", @"T2"];
+    //self.titleArray = @[@"TextA", @"TextB"];
     //self.titleArray = @[@"T0"];
     if (!self.poporSV) {
-        PoporSegmentView * hsv = [[PoporSegmentView alloc] initWithStyle:PoporSegmentViewTypeViewAuto];
+        PoporSegmentView * hsv = [[PoporSegmentView alloc] initWithStyle:PoporSegmentViewTypeScrollView];
         hsv.layer.masksToBounds = YES;
         
         hsv.titleArray    = self.titleArray;
