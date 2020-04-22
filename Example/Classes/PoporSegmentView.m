@@ -17,6 +17,7 @@
 
 @property (nonatomic        ) BOOL titleLineLock;
 @property (nonatomic, weak  ) UIButton * firstBT;
+@property (nonatomic, getter=isUpdateCurrentBT_outer) BOOL updateCurrentBT_outer; // 是否外部修改过 当前选择的 BT
 
 @end
 
@@ -86,8 +87,8 @@
     
     self.btArray = [NSMutableArray<UIButton *> new];
     for (int i = 0; i < self.titleArray.count; i ++) {
-        UIButton * btn      = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.tag             = i;
+        UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.tag        = i;
         if (i == 0) {
             if (self.btTitleSFont) {
                 btn.titleLabel.font = self.btTitleSFont;
@@ -131,10 +132,7 @@
         }
         
         [self.btArray addObject:btn];
-        if (i == 0) {
-            btn.selected = YES;
-            self.currentBT = btn;
-        }
+        
         [btn.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         btn.titleLabel.numberOfLines =0;
     }
@@ -276,17 +274,19 @@
             break;
     }
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        float height = self.titleLineHeight;
-        float width  = self.lineWidth;
-        float y      = self.frame.size.height - self.titleLineBottom - height;
-        
+    dispatch_async(dispatch_get_main_queue(), ^{
+        float height             = self.titleLineHeight;
+        float width              = self.lineWidth;
+        float y                  = self.frame.size.height - self.titleLineBottom - height;
         self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, y, width, height);
         
-        if (self.lineWidthFlexible || self.currentBT == self.btArray.firstObject) {
-            [self updateLineViewToBT:self.btArray.firstObject];
-        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (self.lineWidthFlexible) {
+                if (!self.isUpdateCurrentBT_outer && !self.currentBT) {
+                    [self updateLineViewToBT:self.btArray.firstObject];
+                }
+            }
+        });
     });
 }
 
@@ -300,23 +300,37 @@
         !self.titleLineLock &&
         self.btArray.count > 0) {
         
-        float svOffX    = scrollView.contentOffset.x;
-        float moveScale = svOffX/scrollView.frame.size.width;
-        int nextPage    = moveScale >= self.currentPage ? self.currentPage+1:self.currentPage-1;
+        CGFloat svOffX     = scrollView.contentOffset.x;
+        CGFloat moveScale  = svOffX/scrollView.frame.size.width;
+        NSInteger nextPage = moveScale >= self.currentPage ? self.currentPage+1:self.currentPage-1;
         
         if (0 <= nextPage && nextPage < self.titleArray.count) {
             
             UIButton * nextBT = self.btArray[nextPage];
-            float moveS = fabsf(moveScale - self.currentPage);
+            float moveS = fabs(moveScale - self.currentPage);
+            
+            //NSLog(@"moveS: %.02f", moveS);
+            // 屏蔽手动快速滑动, 忽略代码控制情况.
             if (moveS > 1) {
-                // NSLog(@"快速滑动, 需要重新计算self.currentPage, 防止滑动效果出错.");
-                self.currentPage = svOffX/scrollView.frame.size.width;
-                [self.currentBT setSelected:NO];
-                self.currentBT = self.btArray[self.currentPage];
-                
-                [self scrollViewDidScroll:scrollView];
-                return;
+                if (scrollView.isDragging) {
+                    // NSLog(@"快速滑动, 需要重新计算self.currentPage, 防止滑动效果出错.");
+                    self.currentPage = svOffX/scrollView.frame.size.width;
+                    [self.currentBT setSelected:NO];
+                    self.currentBT = self.btArray[self.currentPage];
+                    
+                    [self scrollViewDidScroll:scrollView];
+                    return;
+                } else {
+                    //self.currentPage = svOffX/scrollView.frame.size.width;
+                    //[self.currentBT setSelected:NO];
+                    //self.currentBT = self.btArray[self.currentPage];
+                    
+                    //[self scrollViewDidScroll:scrollView];
+                    //return;
+                }
             }
+            
+            //if (moveS > 1 && scrollView.isDragging) { return; }
             
             if (self.isLineWidthFlexible) {
                 //NSLog(@"设置动态下划线宽度");
@@ -339,42 +353,37 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView==self.weakLinkSV) {
         float svOffX     = scrollView.contentOffset.x;
+        //CGFloat path     = svOffX/scrollView.frame.size.width;
+        //NSLog(@"结束滑动: %.02f", path);
         self.currentPage = svOffX/scrollView.frame.size.width;
+        //NSLog(@"结束滑动: %.02f -- %i", path, self.currentPage);
         
         // 滑动结束异常处理
         if (self.currentPage >=0 && self.currentPage<self.btArray.count) {
-            [self titleBtnClick:self.btArray[self.currentPage]];
+            UIButton * bt = self.btArray[self.currentPage];
+            //NSLog(@"结束滑动 : %@ -- %i", bt.titleLabel.text, self.currentPage);
+            [self titleBtnClick:bt];
         }
         self.titleLineLock = NO;
     }
 }
 
+// 代码控制
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     if (scrollView == self.weakLinkSV) {
-        self.titleLineLock = NO;
+        [self scrollViewDidEndDecelerating:scrollView];
     }
 }
 
 - (void)titleBtnClick:(UIButton *)bt {
     if (self.currentBT == bt) {
+        //NSLog(@"重复 跳出: %@", bt.titleLabel.text);
         return;
     }
-    // old
-    self.currentBT.selected = NO;
-    if (self.btTitleSFont) {
-        self.currentBT.titleLabel.font = self.btTitleNFont;
-    }
-    // new
-    bt.selected             = YES;
-    self.currentBT          = bt;
-    if (self.btTitleSFont) {
-        self.currentBT.titleLabel.font = self.btTitleSFont;
-    }
     
-    self.currentPage        = (int)bt.tag;
     // 加锁
     self.titleLineLock      = YES;
-    [self updateLineViewToBT:self.currentBT];
+    [self updateLineViewToBT:bt];
     
     [UIView animateWithDuration:0.35 delay:0 usingSpringWithDamping:1 initialSpringVelocity:12 options:UIViewAnimationOptionCurveEaseOut animations:^{
         self.weakLinkSV.contentOffset = CGPointMake(self.weakLinkSV.frame.size.width * bt.tag, 0);
@@ -384,9 +393,29 @@
 }
 
 - (void)updateLineViewToBT:(UIButton *)bt {
-    self.currentBT.selected = NO;
-    self.currentBT = bt;
-    self.currentBT.selected = YES;
+    [self inner__updateLineViewToBT:bt];
+    self.updateCurrentBT_outer = YES;
+}
+
+- (void)inner__updateLineViewToBT:(UIButton *)bt {
+    //NSLog(@"___ self.currentBT.title: %@", self.currentBT.titleLabel.text);
+    //NSLog(@"___ bt.title: %@", bt.titleLabel.text);
+    
+    // old
+    if (self.currentBT) {
+        self.currentBT.selected = NO;
+        if (self.btTitleSFont) {
+            self.currentBT.titleLabel.font = self.btTitleNFont;
+        }
+    }
+    // new
+    bt.selected             = YES;
+    self.currentBT          = bt;
+    if (self.btTitleSFont) {
+        self.currentBT.titleLabel.font = self.btTitleSFont;
+    }
+    // 修改 page
+    self.currentPage        = (int)bt.tag;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isLineWidthFlexible) {

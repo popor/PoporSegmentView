@@ -35,6 +35,9 @@ v1.04
 1.08
 移除了 PoporUI 的依赖  
 
+1.10
+修改 拖拽 和 代码控制 scrollview frame 逻辑
+
 ## Author
 
 popor, 908891024@qq.com
