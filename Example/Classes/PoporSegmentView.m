@@ -281,10 +281,8 @@
         self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, y, width, height);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (self.lineWidthFlexible) {
-                if (!self.isUpdateCurrentBT_outer && !self.currentBT) {
-                    [self updateLineViewToBT:self.btArray.firstObject];
-                }
+            if (!self.isUpdateCurrentBT_outer && !self.currentBT) {
+                [self updateLineViewToBT:self.btArray.firstObject];
             }
         });
     });
