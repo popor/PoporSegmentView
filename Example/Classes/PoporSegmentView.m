@@ -437,7 +437,7 @@
             }
             case PoporSegmentViewTypeScrollView : {
                 // 自适应宽度,会滑动
-                [self.btSV scrollRectToVisible:self.titleLineView.frame animated:YES];
+                [self.btSV scrollRectToVisible:self.currentBT.frame animated:YES];
                 break;
             }
             default:
