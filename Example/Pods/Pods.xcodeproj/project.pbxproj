@@ -10,84 +10,84 @@
 		0096B5A8BA8E4F2BFD8839D0FE7CD696 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = BB1A0667468122B2EC3BDC0BB15DC844 /* MASLayoutConstraint.m */; };
 		115ACCE253A886181B55773DDC70D6ED /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B76D557E2D6FB412E603EC155736EAD /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1E5D56FF58658F9F45723CA2940489EE /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA086924D8F48F2FF158C3649BEED19 /* MASConstraintMaker.m */; };
-		373AF68C26161EBA97121EFFFB972890 /* UIView+MasonrySpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = EE530B1C364808BED346306525AC3BBD /* UIView+MasonrySpacing.m */; };
+		2EA6256CCC028D2D10A7A6A36A28CDB0 /* UIView+MasonrySpacing.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A00F9FD25DC2D7C85A9856CA8EE299D /* UIView+MasonrySpacing.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		324A96B1B14233D93F65403F9ABFF67E /* UIView+MasonrySpacing.m in Sources */ = {isa = PBXBuildFile; fileRef = EE530B1C364808BED346306525AC3BBD /* UIView+MasonrySpacing.m */; };
+		3C94BAC8156608C74E6D47790762680C /* PoporSegmentView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F69D511366BBE190A0334B311EA16371 /* PoporSegmentView-dummy.m */; };
 		42947699890A199B08A896144A878D80 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AA081AA8093EE1B42F7DA595CE5B433 /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		46692A2E77157B00827182C8DC686F72 /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F87DB20369BE940BAD5CCAF384FE0DCE /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4CE091F886EC6324673EFE0AEBBEA0FE /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = F2A38D33CC8C3AF7652B540972C95292 /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		572D05B146EAA3EF5530A0D0E34904A0 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = F23089DF3160015E2FEF011B1353FED3 /* MASViewConstraint.m */; };
 		59EA578EED8BAC126FDC60C32AE11521 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBC942B2D32A875EFCE8B29DA10E4A2 /* NSLayoutConstraint+MASDebugAdditions.m */; };
-		5F53886E13303824A953703CE2A4FADB /* PoporSegmentView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F69D511366BBE190A0334B311EA16371 /* PoporSegmentView-dummy.m */; };
-		621E64BE73B3306E6ABF0BE85A40B608 /* PoporMasonry.h in Headers */ = {isa = PBXBuildFile; fileRef = E27AB7236477BDD3B92DAE59FC04C2F2 /* PoporMasonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		63F87C318437740E8202E4D3DD0826FA /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A10F105BB8C8E15997EE79E87794D0 /* MASCompositeConstraint.m */; };
 		65E88072A2BDC576BFC85E67EF9FBBC6 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B8C2D14074051EB1DD0433EB09E6CE8 /* MASUtilities.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7284AD9507CD8F924E7483E2F20E155A /* PoporSegmentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CC463F2FC4EC2D62C38C8D54973C1 /* PoporSegmentView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7CF2AC7A3B3ED03B30C1E4ED662B0551 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 522C3A2DF485003D8B47D823AD911AD9 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		81F811A56B6724F7E8E2D25364E595E3 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA871ACBDC4720D5FB349386C1A2DF97 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		883DF89F0E160A9AC3228587323BDCE8 /* PoporSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC6F63BDAA1D39D85BFEB2EB7DF59D4 /* PoporSegmentView.m */; };
+		847C10D9F61C482F11D8B9320E252DE4 /* Pods-PoporSegmentView_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A1386052518E0596026275183C34E9 /* Pods-PoporSegmentView_Tests-dummy.m */; };
+		8B4E598ACADE54EEFEEAB7F8BBBEDEED /* PoporMasonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DCFF86B4ED885694E00B8977134D6E /* PoporMasonry-dummy.m */; };
 		9194B58ACE900ED6BAE6AD92E24A2CFF /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 6780A40DE24BBE79843690AA36139394 /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		92BF70E9D3285561EB404A7C4A4A6DEE /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = DD4F7AC3E1DC61C7774E059D1882B90F /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A3307B8FB6EE0A049DBAE3AA4D2C6DA0 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DF6CC0F104DDCA178A3B06FCE730926 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A893FFB0F9137E298D6752729850D1D6 /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 532F30B80430FDBBE81C0D0A6951E97A /* MASViewAttribute.m */; };
-		AA3B3EDDBBBB47156CFB95D60224FD4E /* Pods-PoporSegmentView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B75E49704A1D9B43B358BCC74BDFF009 /* Pods-PoporSegmentView_Example-dummy.m */; };
 		B20A0E5D8F9BCED1A82793C4BE9E7258 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = D60FA751B3AE17045BD3CF36E059FD2F /* Masonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B946AFB1A725D85E07F645A7EF086383 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B1099DD9D70736ED59EB65209416CB /* NSArray+MASAdditions.m */; };
+		BA7F9158D27C205D32DCC9A98FD62096 /* Pods-PoporSegmentView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B75E49704A1D9B43B358BCC74BDFF009 /* Pods-PoporSegmentView_Example-dummy.m */; };
 		C05FC6699632FE712174ED875A605410 /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 63871E37474F3C705508DB018F394BFB /* ViewController+MASAdditions.m */; };
 		C74D2E856ADC8139CD00DBD184061B23 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = A0BB91A0DEA4DC764E08FAA8972E37E0 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		C7920681F0164686C56327ED3C6AAC58 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 233B6C252643EC33588CEB437CBDD4CC /* View+MASAdditions.m */; };
+		D27021BD8BEC83CC7222D1872759F66D /* PoporSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC6F63BDAA1D39D85BFEB2EB7DF59D4 /* PoporSegmentView.m */; };
 		D72EE0E749232B2C899702FC1C9402BB /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0153714FEB9476B8426C9EF650A31C /* Masonry-dummy.m */; };
-		E1269338B3769EE7D8F97C7C2679BA82 /* PoporMasonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DCFF86B4ED885694E00B8977134D6E /* PoporMasonry-dummy.m */; };
-		E66A23621F4F23F563D1E52FDE093ACC /* Pods-PoporSegmentView_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A1386052518E0596026275183C34E9 /* Pods-PoporSegmentView_Tests-dummy.m */; };
 		E76935CFF4AF327F8D9A7C1935F7D900 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8624F5A82CC17E50C774DFE871FC872E /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		EB663E3E1EB4BB670DC29B77DB330135 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = BD87E065ADAA10CADC3DD41D82A1707F /* MASConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		EE936A6838005A5ED1BC5F74BE37B7BD /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8525C08B43D2AB486086370F7F4CE6C7 /* MASConstraint.m */; };
 		F1B75048874B8773E5568E6D3ACA12E4 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 55BAF2AB765860B4C60FF45C96351626 /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FE297514800CEB78BB308B7676BB28E8 /* UIView+MasonrySpacing.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A00F9FD25DC2D7C85A9856CA8EE299D /* UIView+MasonrySpacing.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FB53717C93596967EDC8FDF97DE47EDD /* PoporSegmentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CC463F2FC4EC2D62C38C8D54973C1 /* PoporSegmentView.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FBD14B6367E8A6DCF66CCACA65CD9F2B /* PoporMasonry.h in Headers */ = {isa = PBXBuildFile; fileRef = E27AB7236477BDD3B92DAE59FC04C2F2 /* PoporMasonry.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		09C4E9AE6B813755CA48C051E9DA003E /* PBXContainerItemProxy */ = {
+		08993FE2FF04BA2AE2E44312A14CA271 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CD168DD1DEB6D5D7DB0A78A6E5081B12;
 			remoteInfo = PoporMasonry;
 		};
-		21548EEA509B09506B00DF0BE722A98F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CD168DD1DEB6D5D7DB0A78A6E5081B12;
-			remoteInfo = PoporMasonry;
-		};
-		539B64F067D668354C96C3F85590A3C8 /* PBXContainerItemProxy */ = {
+		22ED6FC9D750E6B26649AEE9CD92C4D2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
 			remoteInfo = Masonry;
 		};
-		951A50F64347F360E46F9FAA2FE42C1E /* PBXContainerItemProxy */ = {
+		63469688A16771261AC05441263E1D47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
 			remoteInfo = Masonry;
 		};
-		C027898EEDBF8DDADE7DE9C52EC7B8FA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
-			remoteInfo = Masonry;
-		};
-		C9E0E4AAADD5B226FAD6BE10B263DDFF /* PBXContainerItemProxy */ = {
+		6D07554879604DB64F5D3674A3362537 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1A121286A927A2515D031AB764781880;
 			remoteInfo = "Pods-PoporSegmentView_Example";
 		};
-		EFD667A291834EE8028ADBCEFBBCC1FE /* PBXContainerItemProxy */ = {
+		9F181D5525AEFCB27964656E8A38E7A7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 55AF53E6C77A10ED4985E04D74A8878E;
+			remoteInfo = Masonry;
+		};
+		AC35E071F4D81C165F572B85939C6D00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD168DD1DEB6D5D7DB0A78A6E5081B12;
+			remoteInfo = PoporMasonry;
+		};
+		F932B6A2119D0C0B21649C80E0A8533A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -168,28 +168,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D66598B39CE27B1C6108A6843132D69 /* Frameworks */ = {
+		0A67838510C35B93EADBCF825A6C4767 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		325F7D870916C7F4B2435A518F22224D /* Frameworks */ = {
+		80C98CF9B7607D06C0361DB90AB499BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		97C2EBE105085848B7D3F42E26715790 /* Frameworks */ = {
+		942BC8BADA386990EB6B5E46EC13472E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BF302EB5F3122444571799258D1CF781 /* Frameworks */ = {
+		AB21ED197708A834817389416084D782 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -389,19 +389,20 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0DD635AA1EC5E7A89F42382EF86D7E08 /* Headers */ = {
+		01798F857981B0CA5B9152E10D8AD6A7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				621E64BE73B3306E6ABF0BE85A40B608 /* PoporMasonry.h in Headers */,
-				FE297514800CEB78BB308B7676BB28E8 /* UIView+MasonrySpacing.h in Headers */,
+				FB53717C93596967EDC8FDF97DE47EDD /* PoporSegmentView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		11FDBAFCAA025408373A63097304F35F /* Headers */ = {
+		135D3D023F5469FAD11F50E716BE642B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FBD14B6367E8A6DCF66CCACA65CD9F2B /* PoporMasonry.h in Headers */,
+				2EA6256CCC028D2D10A7A6A36A28CDB0 /* UIView+MasonrySpacing.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,15 +428,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		905F363C208860EF8FC6F48B6B684226 /* Headers */ = {
+		B27C4534903E94D7371059A1BE4DFA5A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7284AD9507CD8F924E7483E2F20E155A /* PoporSegmentView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED2C75AA818584E5BB0472480F6BE373 /* Headers */ = {
+		B2C25DB110BBC1F8AC5E77DC93D481FB /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -447,18 +447,18 @@
 /* Begin PBXNativeTarget section */
 		1A121286A927A2515D031AB764781880 /* Pods-PoporSegmentView_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 25BB2A65732224A6A0EBE2E65DC2715D /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Example" */;
+			buildConfigurationList = 070E70FBC331E0DE9CAA9D2F2FA1B011 /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Example" */;
 			buildPhases = (
-				11FDBAFCAA025408373A63097304F35F /* Headers */,
-				9A1DF867FBC8116B25006794E34FBC22 /* Sources */,
-				1D66598B39CE27B1C6108A6843132D69 /* Frameworks */,
+				B2C25DB110BBC1F8AC5E77DC93D481FB /* Headers */,
+				0425EEBD9E86460E9CDB88C58BE92F1E /* Sources */,
+				942BC8BADA386990EB6B5E46EC13472E /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2F328B21BEEF9D97018AE8C91D9A7D6F /* PBXTargetDependency */,
-				75A872D84ACEFEEA30670A159CEC2E09 /* PBXTargetDependency */,
-				8AF31D568B3FD583A0ACCB05695B1C9F /* PBXTargetDependency */,
+				214FF62ED8635563883351FA60E648A9 /* PBXTargetDependency */,
+				393D4014A47D7C8A15AD6D266AA9121A /* PBXTargetDependency */,
+				A286289D635D18FEEC53F87F1075E175 /* PBXTargetDependency */,
 			);
 			name = "Pods-PoporSegmentView_Example";
 			productName = "Pods-PoporSegmentView_Example";
@@ -484,16 +484,16 @@
 		};
 		8C4808B7576483CED4DC9718857F31DA /* Pods-PoporSegmentView_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D1BC55D813E9B3D421EF7FE289186457 /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Tests" */;
+			buildConfigurationList = 9EEC353062C9731AC1086D24B65BAE65 /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Tests" */;
 			buildPhases = (
-				ED2C75AA818584E5BB0472480F6BE373 /* Headers */,
-				4A07A4DCC38354A99390D5C3621EB798 /* Sources */,
-				BF302EB5F3122444571799258D1CF781 /* Frameworks */,
+				B27C4534903E94D7371059A1BE4DFA5A /* Headers */,
+				2B2B70C85E89A50ECC0794CFF5E1B644 /* Sources */,
+				AB21ED197708A834817389416084D782 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				DCDBDDC62BDAD7C560720B669199D72F /* PBXTargetDependency */,
+				F527030CEE071DEF6CA496901415BBEB /* PBXTargetDependency */,
 			);
 			name = "Pods-PoporSegmentView_Tests";
 			productName = "Pods-PoporSegmentView_Tests";
@@ -502,16 +502,16 @@
 		};
 		CD168DD1DEB6D5D7DB0A78A6E5081B12 /* PoporMasonry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 236F8BAEDB636A144A0CF45C80D1E67B /* Build configuration list for PBXNativeTarget "PoporMasonry" */;
+			buildConfigurationList = 0EDBC9961847859A6A373D954B74E6D4 /* Build configuration list for PBXNativeTarget "PoporMasonry" */;
 			buildPhases = (
-				0DD635AA1EC5E7A89F42382EF86D7E08 /* Headers */,
-				ADB03384E046DA756235CB1D2960FA05 /* Sources */,
-				97C2EBE105085848B7D3F42E26715790 /* Frameworks */,
+				135D3D023F5469FAD11F50E716BE642B /* Headers */,
+				ECEC013599944F3A90232D8D8C23B451 /* Sources */,
+				80C98CF9B7607D06C0361DB90AB499BA /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F8A003D7957B7241B9CAECADBFCE70F2 /* PBXTargetDependency */,
+				3FCAEF654142C62F49BA277DF73D70D6 /* PBXTargetDependency */,
 			);
 			name = PoporMasonry;
 			productName = PoporMasonry;
@@ -520,17 +520,17 @@
 		};
 		D93736121004087097070AFB129C52B6 /* PoporSegmentView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DFCA6B70A9124BFF0B6AFFDBB17CF6EC /* Build configuration list for PBXNativeTarget "PoporSegmentView" */;
+			buildConfigurationList = 7D0F50BBDCD45A6052663D1730278E81 /* Build configuration list for PBXNativeTarget "PoporSegmentView" */;
 			buildPhases = (
-				905F363C208860EF8FC6F48B6B684226 /* Headers */,
-				26631267FA19B0F822CC1F9E53F270CD /* Sources */,
-				325F7D870916C7F4B2435A518F22224D /* Frameworks */,
+				01798F857981B0CA5B9152E10D8AD6A7 /* Headers */,
+				3FA054DD021A814EC958B9D575801BA2 /* Sources */,
+				0A67838510C35B93EADBCF825A6C4767 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B9F7B1A98D5D34E4E95085773AA87350 /* PBXTargetDependency */,
-				4ACEF23878BF4D8494719BE9226C94C1 /* PBXTargetDependency */,
+				5AC2A7156E4FEAE282127C431BF3F1CD /* PBXTargetDependency */,
+				FF6887C460A6E9DCB8934917828A61A9 /* PBXTargetDependency */,
 			);
 			name = PoporSegmentView;
 			productName = PoporSegmentView;
@@ -569,20 +569,28 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		26631267FA19B0F822CC1F9E53F270CD /* Sources */ = {
+		0425EEBD9E86460E9CDB88C58BE92F1E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F53886E13303824A953703CE2A4FADB /* PoporSegmentView-dummy.m in Sources */,
-				883DF89F0E160A9AC3228587323BDCE8 /* PoporSegmentView.m in Sources */,
+				BA7F9158D27C205D32DCC9A98FD62096 /* Pods-PoporSegmentView_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4A07A4DCC38354A99390D5C3621EB798 /* Sources */ = {
+		2B2B70C85E89A50ECC0794CFF5E1B644 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E66A23621F4F23F563D1E52FDE093ACC /* Pods-PoporSegmentView_Tests-dummy.m in Sources */,
+				847C10D9F61C482F11D8B9320E252DE4 /* Pods-PoporSegmentView_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3FA054DD021A814EC958B9D575801BA2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C94BAC8156608C74E6D47790762680C /* PoporSegmentView-dummy.m in Sources */,
+				D27021BD8BEC83CC7222D1872759F66D /* PoporSegmentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,67 +612,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9A1DF867FBC8116B25006794E34FBC22 /* Sources */ = {
+		ECEC013599944F3A90232D8D8C23B451 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA3B3EDDBBBB47156CFB95D60224FD4E /* Pods-PoporSegmentView_Example-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ADB03384E046DA756235CB1D2960FA05 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E1269338B3769EE7D8F97C7C2679BA82 /* PoporMasonry-dummy.m in Sources */,
-				373AF68C26161EBA97121EFFFB972890 /* UIView+MasonrySpacing.m in Sources */,
+				8B4E598ACADE54EEFEEAB7F8BBBEDEED /* PoporMasonry-dummy.m in Sources */,
+				324A96B1B14233D93F65403F9ABFF67E /* UIView+MasonrySpacing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2F328B21BEEF9D97018AE8C91D9A7D6F /* PBXTargetDependency */ = {
+		214FF62ED8635563883351FA60E648A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Masonry;
 			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = 539B64F067D668354C96C3F85590A3C8 /* PBXContainerItemProxy */;
+			targetProxy = 22ED6FC9D750E6B26649AEE9CD92C4D2 /* PBXContainerItemProxy */;
 		};
-		4ACEF23878BF4D8494719BE9226C94C1 /* PBXTargetDependency */ = {
+		393D4014A47D7C8A15AD6D266AA9121A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PoporMasonry;
 			target = CD168DD1DEB6D5D7DB0A78A6E5081B12 /* PoporMasonry */;
-			targetProxy = 09C4E9AE6B813755CA48C051E9DA003E /* PBXContainerItemProxy */;
+			targetProxy = AC35E071F4D81C165F572B85939C6D00 /* PBXContainerItemProxy */;
 		};
-		75A872D84ACEFEEA30670A159CEC2E09 /* PBXTargetDependency */ = {
+		3FCAEF654142C62F49BA277DF73D70D6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = PoporMasonry;
-			target = CD168DD1DEB6D5D7DB0A78A6E5081B12 /* PoporMasonry */;
-			targetProxy = 21548EEA509B09506B00DF0BE722A98F /* PBXContainerItemProxy */;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = 9F181D5525AEFCB27964656E8A38E7A7 /* PBXContainerItemProxy */;
 		};
-		8AF31D568B3FD583A0ACCB05695B1C9F /* PBXTargetDependency */ = {
+		5AC2A7156E4FEAE282127C431BF3F1CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Masonry;
+			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
+			targetProxy = 63469688A16771261AC05441263E1D47 /* PBXContainerItemProxy */;
+		};
+		A286289D635D18FEEC53F87F1075E175 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PoporSegmentView;
 			target = D93736121004087097070AFB129C52B6 /* PoporSegmentView */;
-			targetProxy = EFD667A291834EE8028ADBCEFBBCC1FE /* PBXContainerItemProxy */;
+			targetProxy = F932B6A2119D0C0B21649C80E0A8533A /* PBXContainerItemProxy */;
 		};
-		B9F7B1A98D5D34E4E95085773AA87350 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Masonry;
-			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = C027898EEDBF8DDADE7DE9C52EC7B8FA /* PBXContainerItemProxy */;
-		};
-		DCDBDDC62BDAD7C560720B669199D72F /* PBXTargetDependency */ = {
+		F527030CEE071DEF6CA496901415BBEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-PoporSegmentView_Example";
 			target = 1A121286A927A2515D031AB764781880 /* Pods-PoporSegmentView_Example */;
-			targetProxy = C9E0E4AAADD5B226FAD6BE10B263DDFF /* PBXContainerItemProxy */;
+			targetProxy = 6D07554879604DB64F5D3674A3362537 /* PBXContainerItemProxy */;
 		};
-		F8A003D7957B7241B9CAECADBFCE70F2 /* PBXTargetDependency */ = {
+		FF6887C460A6E9DCB8934917828A61A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Masonry;
-			target = 55AF53E6C77A10ED4985E04D74A8878E /* Masonry */;
-			targetProxy = 951A50F64347F360E46F9FAA2FE42C1E /* PBXContainerItemProxy */;
+			name = PoporMasonry;
+			target = CD168DD1DEB6D5D7DB0A78A6E5081B12 /* PoporMasonry */;
+			targetProxy = 08993FE2FF04BA2AE2E44312A14CA271 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -694,7 +694,7 @@
 			};
 			name = Release;
 		};
-		30FA8D646DD4E4965B1912BDBB3D268C /* Release */ = {
+		0DF89E90DCF4BD42FA7F5E8A851D1191 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B8AA347BDCBA90E833DD796B676E8320 /* Pods-PoporSegmentView_Tests.release.xcconfig */;
 			buildSettings = {
@@ -716,7 +716,31 @@
 			};
 			name = Release;
 		};
-		48168B1366197EE8D1C77B1C01F80850 /* Debug */ = {
+		4190E16DC914D0666B412795C96AC6B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5667251353718B9009521446B8F0CC4F /* PoporMasonry.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/PoporMasonry/PoporMasonry-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = PoporMasonry;
+				PRODUCT_NAME = PoporMasonry;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4DE54F1755647A2D8D8BE59E43CD11F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAE136CE8065198389956275CB7FBC69 /* Pods-PoporSegmentView_Tests.debug.xcconfig */;
 			buildSettings = {
@@ -736,66 +760,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
-		};
-		4BE66A09A74FD25164AAB3C2645B9B93 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Release;
 		};
 		514889E0BA1EAABD6BC23A69901CB2DB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -821,32 +785,60 @@
 			};
 			name = Debug;
 		};
-		708A2C10F1DBEC8E0D8B20713F35B2C2 /* Release */ = {
+		637FC0D0FC8CBFB9B473AD4E7734203E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E53FE6A7C702ADAA43892697D8377776 /* Pods-PoporSegmentView_Example.release.xcconfig */;
+			baseConfigurationReference = 877F32DA45DE67773A6AF458362E287F /* PoporSegmentView.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/PoporSegmentView/PoporSegmentView-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = PoporSegmentView;
+				PRODUCT_NAME = PoporSegmentView;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7E5DCB23E75946B4511E20F02E6CDD2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E581ABE3AC6B24E61B550F637D87C66 /* PoporSegmentView.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/PoporSegmentView/PoporSegmentView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = PoporSegmentView;
+				PRODUCT_NAME = PoporSegmentView;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		7EF7227D9B20A1D549000096ACCB23D7 /* Debug */ = {
+		8DF792B5675818867C95F03EE9A5D3C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -907,55 +899,50 @@
 			};
 			name = Debug;
 		};
-		ACAA96B9F8E6ECD4B082A4C6589AF1ED /* Debug */ = {
+		92216D13C65C55E818D126E2641D5813 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5667251353718B9009521446B8F0CC4F /* PoporMasonry.debug.xcconfig */;
+			baseConfigurationReference = E53FE6A7C702ADAA43892697D8377776 /* Pods-PoporSegmentView_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/PoporMasonry/PoporMasonry-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = PoporMasonry;
-				PRODUCT_NAME = PoporMasonry;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
-			name = Debug;
+			name = Release;
 		};
-		CB8DF900DB162BBF149D4F5CAD75E0D1 /* Debug */ = {
+		97CA9A6239A4653E3A902499BB3B05D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 877F32DA45DE67773A6AF458362E287F /* PoporSegmentView.debug.xcconfig */;
+			baseConfigurationReference = 0164ADC7E74541EDB008D07B0617DE13 /* Pods-PoporSegmentView_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/PoporSegmentView/PoporSegmentView-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = PoporSegmentView;
-				PRODUCT_NAME = PoporSegmentView;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		E169A97C1292F551A0AD68C1F2B7C6FB /* Release */ = {
+		AB6BF89D63F5A0A097CFE727CF0EB475 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 095E13CD19AE36CCDA632AEDEEEDCD48 /* PoporMasonry.release.xcconfig */;
 			buildSettings = {
@@ -980,55 +967,79 @@
 			};
 			name = Release;
 		};
-		E6D4CEF287F74E3B2526BEC6BEB4063B /* Release */ = {
+		CE55861AB8BDFB3786DDE452F83A4836 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8E581ABE3AC6B24E61B550F637D87C66 /* PoporSegmentView.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/PoporSegmentView/PoporSegmentView-prefix.pch";
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = PoporSegmentView;
-				PRODUCT_NAME = PoporSegmentView;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
-		};
-		F86721CE6929BF68F3EFA12BD6D4D0EC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0164ADC7E74541EDB008D07B0617DE13 /* Pods-PoporSegmentView_Example.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		070E70FBC331E0DE9CAA9D2F2FA1B011 /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97CA9A6239A4653E3A902499BB3B05D2 /* Debug */,
+				92216D13C65C55E818D126E2641D5813 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0B9F7EAACDDA564EC328F53A4AB8CF85 /* Build configuration list for PBXNativeTarget "Masonry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1038,20 +1049,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		236F8BAEDB636A144A0CF45C80D1E67B /* Build configuration list for PBXNativeTarget "PoporMasonry" */ = {
+		0EDBC9961847859A6A373D954B74E6D4 /* Build configuration list for PBXNativeTarget "PoporMasonry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ACAA96B9F8E6ECD4B082A4C6589AF1ED /* Debug */,
-				E169A97C1292F551A0AD68C1F2B7C6FB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		25BB2A65732224A6A0EBE2E65DC2715D /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F86721CE6929BF68F3EFA12BD6D4D0EC /* Debug */,
-				708A2C10F1DBEC8E0D8B20713F35B2C2 /* Release */,
+				4190E16DC914D0666B412795C96AC6B6 /* Debug */,
+				AB6BF89D63F5A0A097CFE727CF0EB475 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1059,26 +1061,26 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7EF7227D9B20A1D549000096ACCB23D7 /* Debug */,
-				4BE66A09A74FD25164AAB3C2645B9B93 /* Release */,
+				8DF792B5675818867C95F03EE9A5D3C6 /* Debug */,
+				CE55861AB8BDFB3786DDE452F83A4836 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D1BC55D813E9B3D421EF7FE289186457 /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Tests" */ = {
+		7D0F50BBDCD45A6052663D1730278E81 /* Build configuration list for PBXNativeTarget "PoporSegmentView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				48168B1366197EE8D1C77B1C01F80850 /* Debug */,
-				30FA8D646DD4E4965B1912BDBB3D268C /* Release */,
+				637FC0D0FC8CBFB9B473AD4E7734203E /* Debug */,
+				7E5DCB23E75946B4511E20F02E6CDD2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DFCA6B70A9124BFF0B6AFFDBB17CF6EC /* Build configuration list for PBXNativeTarget "PoporSegmentView" */ = {
+		9EEC353062C9731AC1086D24B65BAE65 /* Build configuration list for PBXNativeTarget "Pods-PoporSegmentView_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CB8DF900DB162BBF149D4F5CAD75E0D1 /* Debug */,
-				E6D4CEF287F74E3B2526BEC6BEB4063B /* Release */,
+				4DE54F1755647A2D8D8BE59E43CD11F1 /* Debug */,
+				0DF89E90DCF4BD42FA7F5E8A851D1191 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -38,6 +38,9 @@ v1.04
 1.10
 修改 拖拽 和 代码控制 scrollview frame 逻辑
 
+1.11
+PoporSegmentViewTypeScrollView 的 bt masonry 增加top bottom =0
+
 ## Author
 
 popor, 908891024@qq.com

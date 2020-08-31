@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewLineType) {
     PoporSegmentViewLineTypeInsert, // 自适应宽度,会滑动
 };
 
+typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
+
 // 不针对可以滑动的情况.
 @interface PoporSegmentView : UIView <UIScrollViewDelegate>
 
@@ -46,6 +48,7 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewLineType) {
 @property (nonatomic, strong) UIColor        * lineColor;
 
 @property (nonatomic        ) UIEdgeInsets   btContentEdgeInsets;
+@property (nonatomic        ) CGFloat        lineMoveX;// 线条移动的范围
 
 // 由于采用的绝对布局,所以不是和bt的相对参数
 @property (nonatomic        ) CGFloat        titleLineBottom; // lineBottom之间的间距: 默认2
@@ -53,6 +56,8 @@ typedef NS_ENUM(NSInteger, PoporSegmentViewLineType) {
 
 // titleLine 固定宽度
 @property (nonatomic        ) CGFloat        lineWidth;
+
+@property (nonatomic, copy  ) BlockP_PoporSegmentViewButton titleBtClickBlock;
 
 // titleLine 自适应宽度
 // 假如line width 根据文字内容变化的话

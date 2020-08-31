@@ -138,6 +138,7 @@
     }
     if (!self.titleLineView) {
         UIView * oneV = [[UIView alloc] init];
+        oneV.alpha = 0; // 先隐藏, 不然动画效果不好看
         self.titleLineView = oneV;
         
         oneV.backgroundColor = self.lineColor;
@@ -248,6 +249,8 @@
             
             UIButton * priorBT = self.btArray.firstObject;
             [priorBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(0);
+                make.bottom.mas_equalTo(0);
                 make.left.mas_equalTo(0);
                 make.centerY.mas_equalTo(0);
             }];
@@ -256,6 +259,8 @@
             for (int i = 1; i<self.btArray.count; i++) {
                 oneBT = self.btArray[i];
                 [oneBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
                     make.left.mas_equalTo(priorBT.mas_right);
                     make.centerY.mas_equalTo(0);
                 }];
@@ -278,12 +283,15 @@
         float height             = self.titleLineHeight;
         float width              = self.lineWidth;
         float y                  = self.frame.size.height - self.titleLineBottom - height;
-        self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, y, width, height);
+        self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x +self.lineMoveX, y, width, height);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (!self.isUpdateCurrentBT_outer && !self.currentBT) {
                 [self updateLineViewToBT:self.btArray.firstObject];
             }
+            [UIView animateWithDuration:0.15 animations:^{
+                self.titleLineView.alpha = 1;
+            }];
         });
     });
 }
@@ -341,7 +349,7 @@
                 //NSLog(@"设置下划线中心");
                 float moveMaxWidth = self.currentBT.center.x - nextBT.center.x;
                 float centerX      = self.currentBT.center.x - moveMaxWidth*moveS;
-                self.titleLineView.center = CGPointMake(centerX, self.titleLineView.center.y);
+                self.titleLineView.center = CGPointMake(centerX +self.lineMoveX, self.titleLineView.center.y);
             }
         }
     }
@@ -374,6 +382,10 @@
 }
 
 - (void)titleBtnClick:(UIButton *)bt {
+    if (self.titleBtClickBlock) {
+        self.titleBtClickBlock(bt);
+    }
+    
     if (self.currentBT == bt) {
         //NSLog(@"重复 跳出: %@", bt.titleLabel.text);
         return;
@@ -419,9 +431,9 @@
         if (self.isLineWidthFlexible) {
             CGFloat width = bt.frame.size.width*self.lineWidthScale;
             self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width, self.titleLineView.frame.size.height);
-            self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);
+            self.titleLineView.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineView.center.y);
         }else{
-            self.titleLineView.center = CGPointMake(bt.center.x, self.titleLineView.center.y);
+            self.titleLineView.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineView.center.y);
         }
         
         switch (self.style) {
