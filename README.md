@@ -41,6 +41,9 @@ v1.04
 1.11
 PoporSegmentViewTypeScrollView 的 bt masonry 增加top bottom =0
 
+1.12
+滑动的时候 增加了 标题颜色渐变功能
+
 ## Author
 
 popor, 908891024@qq.com

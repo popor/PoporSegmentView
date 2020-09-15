@@ -35,8 +35,10 @@
 
 - (void)addinfoHSVs {
     self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4", @"Test55555", @"T6"];
+    self.titleArray = @[@"T0", @"T1", @"T2", @"T3", @"T4", @"T5", @"T6", @"T7", @"T8", @"T9", @"T10", @"T0", @"T1", @"T2", @"T3", @"T4", @"T5", @"T6", @"T7", @"T8", @"T9", @"T10", @"T0", @"T1", @"T2", @"T3", @"T4", @"T5", @"T6", @"T7", @"T8", @"T9", @"T10" ];
+    self.titleArray = @[@"T0", @"T1", @"T2", @"T3", @"T4", @"T5", @"T6", @"T7", @"T8", @"T9", @"T10", @"T0", @"T1", @"T2", @"T3"];
     //self.titleArray = @[@"T0", @"Test1", @"T2", @"Test333", @"T4"];
-    self.titleArray = @[@"T0", @"Test1", @"T2"];
+    //self.titleArray = @[@"T0", @"Test1", @"T2"];
     //self.titleArray = @[@"TextA", @"TextB"];
     //self.titleArray = @[@"T0"];
     if (!self.poporSV) {
@@ -45,14 +47,26 @@
         
         hsv.titleArray    = self.titleArray;
         hsv.originX       = 10;
-        hsv.btTitleNColor = [UIColor lightGrayColor];
-        hsv.btTitleSColor = [UIColor blackColor];
+        
+        //hsv.btTitleNColor = [UIColor lightGrayColor];
+        //hsv.btTitleSColor = [UIColor blackColor];
+        
+        hsv.btTitleNColor = [UIColor greenColor];
+        hsv.btTitleSColor = [UIColor redColor];
+        hsv.btTitleColorGradualChange = YES;
+        //hsv.btTitleColorGradualChange = NO;
+        
+        
         hsv.lineColor     = [UIColor blackColor];
         
         hsv.btTitleNFont  = [UIFont systemFontOfSize:18];
-        hsv.btTitleSFont  = [UIFont boldSystemFontOfSize:18];
+        hsv.btTitleSFont  = [UIFont systemFontOfSize:18];
+        
+        
+        //hsv.btTitleSFont  = [UIFont boldSystemFontOfSize:18];
         
         hsv.btContentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 20);
+        //hsv.btContentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         
         hsv.lineWidthFlexible = YES;
         hsv.lineWidthScale    = 1.1;

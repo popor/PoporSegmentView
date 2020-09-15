@@ -255,7 +255,7 @@
 				ORGANIZATIONNAME = popor;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = 6SK6RQ8S8Q;
+						DevelopmentTeam = 7DUQZP3WD7;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -486,12 +486,12 @@
 			baseConfigurationReference = 040AAF3FE705D9049B53D961 /* Pods-PoporSegmentView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6SK6RQ8S8Q;
+				DEVELOPMENT_TEAM = 7DUQZP3WD7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PoporSegmentView/PoporSegmentView-Prefix.pch";
 				INFOPLIST_FILE = "PoporSegmentView/PoporSegmentView-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.wkq;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xyeduzj.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;
@@ -503,12 +503,12 @@
 			baseConfigurationReference = 850F2C57E1DF06DD88422822 /* Pods-PoporSegmentView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6SK6RQ8S8Q;
+				DEVELOPMENT_TEAM = 7DUQZP3WD7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PoporSegmentView/PoporSegmentView-Prefix.pch";
 				INFOPLIST_FILE = "PoporSegmentView/PoporSegmentView-Info.plist";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ifcar99.wkq;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xyeduzj.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				WRAPPER_EXTENSION = app;

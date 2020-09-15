@@ -19,6 +19,7 @@
 @property (nonatomic, weak  ) UIButton * firstBT;
 @property (nonatomic, getter=isUpdateCurrentBT_outer) BOOL updateCurrentBT_outer; // 是否外部修改过 当前选择的 BT
 
+@property (nonatomic        ) BOOL ignoreUpdateBtSvConentOffset; // 是否 临时忽略
 @end
 
 @implementation PoporSegmentView
@@ -88,6 +89,7 @@
     self.btArray = [NSMutableArray<UIButton *> new];
     for (int i = 0; i < self.titleArray.count; i ++) {
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        //btn.backgroundColor = [UIColor brownColor];
         btn.tag        = i;
         if (i == 0) {
             if (self.btTitleSFont) {
@@ -100,8 +102,17 @@
         }
         
         [btn setTitle:self.titleArray[i] forState:UIControlStateNormal];
-        [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
-        [btn setTitleColor:self.btTitleSColor forState:UIControlStateSelected];
+        if (self.btTitleColorGradualChange) {
+            if (i == 0) {
+                [btn setTitleColor:self.btTitleSColor forState:UIControlStateNormal];
+            } else {
+                [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
+            }
+        } else {
+            [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
+            [btn setTitleColor:self.btTitleSColor forState:UIControlStateSelected];
+        }
+        
         // [btn setBackgroundImage:[UIImage imageFromColor:[UIColor grayColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
         //[btn setBackgroundColor:[UIColor brownColor]];
         
@@ -316,15 +327,24 @@
             float moveS = fabs(moveScale - self.currentPage);
             
             //NSLog(@"moveS: %.02f", moveS);
-            // 屏蔽手动快速滑动, 忽略代码控制情况.
+            // ------ 屏蔽手动快速滑动, 忽略代码控制情况. ------
             if (moveS > 1) {
                 if (scrollView.isDragging) {
                     // NSLog(@"快速滑动, 需要重新计算self.currentPage, 防止滑动效果出错.");
+                    if (self.btTitleColorGradualChange) {
+                        
+                    } else {
+                        self.currentBT.selected = NO;
+                    }
+                    
                     self.currentPage = svOffX/scrollView.frame.size.width;
-                    [self.currentBT setSelected:NO];
-                    self.currentBT = self.btArray[self.currentPage];
+                    self.currentBT   = self.btArray[self.currentPage];
+                    
+                    [self updateCurrentBTColorPage_Bt:self.currentBT];
+                    //[self updateTitleLineView_btSV_Bt:self.currentBT];
                     
                     [self scrollViewDidScroll:scrollView];
+                    
                     return;
                 } else {
                     //self.currentPage = svOffX/scrollView.frame.size.width;
@@ -335,9 +355,18 @@
                     //return;
                 }
             }
+            if (self.btTitleColorGradualChange) {
+                UIColor * mixColorA;
+                UIColor * mixColorB;
+                
+                [self mixColorA:self.btTitleNColor colorB:self.btTitleSColor scale:moveS mixColorA:&mixColorA mixColorB:&mixColorB];
+                [self.currentBT setTitleColor:mixColorA forState:UIControlStateNormal];
+                [nextBT setTitleColor:mixColorB forState:UIControlStateNormal];
+            } else {
+                
+            }
             
-            //if (moveS > 1 && scrollView.isDragging) { return; }
-            
+            // ------ 下划线 ------ //if (moveS > 1 && scrollView.isDragging) { return; }
             if (self.isLineWidthFlexible) {
                 //NSLog(@"设置动态下划线宽度");
                 float width = (1.0-moveS)*self.currentBT.frame.size.width + moveS*nextBT.frame.size.width;
@@ -351,6 +380,28 @@
                 float centerX      = self.currentBT.center.x - moveMaxWidth*moveS;
                 self.titleLineView.center = CGPointMake(centerX +self.lineMoveX, self.titleLineView.center.y);
             }
+            
+            // ------ 检查nextBT是否在可见范围 ------
+            if (!self.ignoreUpdateBtSvConentOffset) {
+                CGRect rect = CGRectMake(self.btSV.contentOffset.x, self.btSV.contentOffset.y, self.btSV.visibleSize.width, self.btSV.visibleSize.height);
+                if (!CGRectContainsRect(rect, nextBT.frame)) {
+                    
+                    self.ignoreUpdateBtSvConentOffset = YES;
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        self.ignoreUpdateBtSvConentOffset = NO;
+                    });
+                    
+                    // 文本长度超过满屏的暂不考虑
+                    if (nextBT.frame.origin.x < self.btSV.contentOffset.x) { // 靠左
+                        [self.btSV setContentOffset:CGPointMake(nextBT.frame.origin.x -self.originX, nextBT.frame.origin.y) animated:YES];
+                    } else { // 靠右
+                        [self.btSV setContentOffset:CGPointMake(CGRectGetMaxX(nextBT.frame) -self.btSV.frame.size.width +self.originX, nextBT.frame.origin.y) animated:YES];
+                    }
+                }
+                
+            }
+           
+            // ----------
         }
     }
     
@@ -358,19 +409,29 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (scrollView==self.weakLinkSV) {
-        float svOffX     = scrollView.contentOffset.x;
-        //CGFloat path     = svOffX/scrollView.frame.size.width;
-        //NSLog(@"结束滑动: %.02f", path);
-        self.currentPage = svOffX/scrollView.frame.size.width;
-        //NSLog(@"结束滑动: %.02f -- %i", path, self.currentPage);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self checkPageNumber:scrollView];
+            self.titleLineLock = NO;
+        });
+    }
+}
+
+- (void)checkPageNumber:(UIScrollView *)scrollView {
+    float svOffX     = scrollView.contentOffset.x;
+    //CGFloat path     = svOffX/scrollView.frame.size.width;
+    //NSLog(@"结束滑动: %.02f", path);
+    self.currentPage = svOffX/scrollView.frame.size.width;
+    //NSLog(@"结束滑动: %.02f -- %i", path, self.currentPage);
+    
+    // NSLog(@"self.currentPage: %li", self.currentPage);
+    
+    // 滑动结束异常处理
+    if (self.currentPage >=0 && self.currentPage<self.btArray.count) {
+        UIButton * bt = self.btArray[self.currentPage];
+        //NSLog(@"结束滑动 : %@ -- %i", bt.titleLabel.text, self.currentPage);
+        [self titleBtnClick:bt];
+    } else {
         
-        // 滑动结束异常处理
-        if (self.currentPage >=0 && self.currentPage<self.btArray.count) {
-            UIButton * bt = self.btArray[self.currentPage];
-            //NSLog(@"结束滑动 : %@ -- %i", bt.titleLabel.text, self.currentPage);
-            [self titleBtnClick:bt];
-        }
-        self.titleLineLock = NO;
     }
 }
 
@@ -386,20 +447,26 @@
         self.titleBtClickBlock(bt);
     }
     
-    if (self.currentBT == bt) {
-        //NSLog(@"重复 跳出: %@", bt.titleLabel.text);
-        return;
-    }
+    // 容易出错, 也没绝对的必要非要检查, 主要问题在于快速滑动的时候, 有点问题.
+    //    if (self.currentBT == bt) {
+    //        //NSLog(@"重复 跳出: %@", bt.titleLabel.text);
+    //        return;
+    //    }
     
     // 加锁
-    self.titleLineLock      = YES;
+    self.titleLineLock = YES;
     [self updateLineViewToBT:bt];
     
-    [UIView animateWithDuration:0.35 delay:0 usingSpringWithDamping:1 initialSpringVelocity:12 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        self.weakLinkSV.contentOffset = CGPointMake(self.weakLinkSV.frame.size.width * bt.tag, 0);
-    } completion:^(BOOL finished) {
-        self.titleLineLock = NO;
-    }];
+    CGFloat moveToX = self.weakLinkSV.frame.size.width * bt.tag;
+    if (self.weakLinkSV.contentOffset.x != moveToX) {
+        [UIView animateWithDuration:0.35 delay:0 usingSpringWithDamping:1 initialSpringVelocity:12 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            self.weakLinkSV.contentOffset = CGPointMake(moveToX, 0);
+        } completion:^(BOOL finished) {
+            self.titleLineLock = NO;
+        }];
+    } else {
+         self.titleLineLock = NO;
+    }
 }
 
 - (void)updateLineViewToBT:(UIButton *)bt {
@@ -411,26 +478,48 @@
     //NSLog(@"___ self.currentBT.title: %@", self.currentBT.titleLabel.text);
     //NSLog(@"___ bt.title: %@", bt.titleLabel.text);
     
-    // old
-    if (self.currentBT) {
-        self.currentBT.selected = NO;
+    [self updateCurrentBTColorPage_Bt:bt];
+    [self updateTitleLineView_btSV_Bt:bt];
+}
+
+- (void)updateCurrentBTColorPage_Bt:(UIButton *)bt {
+    if (self.btTitleColorGradualChange) {
+        if (self.currentBT) { // old
+            [self.currentBT setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
+            if (self.btTitleSFont) {
+                self.currentBT.titleLabel.font = self.btTitleNFont;
+            }
+        }
+        // new
+        self.currentBT = bt;
+        [self.currentBT setTitleColor:self.btTitleSColor forState:UIControlStateNormal];
         if (self.btTitleSFont) {
-            self.currentBT.titleLabel.font = self.btTitleNFont;
+            self.currentBT.titleLabel.font = self.btTitleSFont;
+        }
+    } else {
+        if (self.currentBT) { // old
+            self.currentBT.selected = NO;
+            if (self.btTitleSFont) {
+                self.currentBT.titleLabel.font = self.btTitleNFont;
+            }
+        }
+        // new
+        bt.selected = YES;
+        self.currentBT = bt;
+        if (self.btTitleSFont) {
+            self.currentBT.titleLabel.font = self.btTitleSFont;
         }
     }
-    // new
-    bt.selected             = YES;
-    self.currentBT          = bt;
-    if (self.btTitleSFont) {
-        self.currentBT.titleLabel.font = self.btTitleSFont;
-    }
-    // 修改 page
-    self.currentPage        = (int)bt.tag;
     
+    // 修改 page
+    self.currentPage = (int)bt.tag;
+}
+
+- (void)updateTitleLineView_btSV_Bt:(UIButton *)bt {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isLineWidthFlexible) {
             CGFloat width = bt.frame.size.width*self.lineWidthScale;
-            self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width, self.titleLineView.frame.size.height);
+            self.titleLineView.frame  = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width, self.titleLineView.frame.size.height);
             self.titleLineView.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineView.center.y);
         }else{
             self.titleLineView.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineView.center.y);
@@ -457,6 +546,55 @@
         }
         // NSLog(@"tag : %li - iv.center.x: %f", bt.tag, self.titleLineView.center.x);
     });
+}
+
+- (void)mixColorA:(UIColor *)colorA colorB:(UIColor *)colorB scale:(CGFloat)scale mixColorA:(UIColor **)mixColorA mixColorB:(UIColor **)mixColorB {
+    CGFloat ra, ga, ba, aa;
+    CGFloat rb, gb, bb, ab;
+    [self color:colorA r:&ra g:&ga b:&ba a:&aa];
+    [self color:colorB r:&rb g:&gb b:&bb a:&ab];
+    
+    CGFloat scaleA = scale;
+    CGFloat scaleB = 1 -scale;
+    
+    *mixColorA = [UIColor colorWithRed:(ra*scaleA +rb*scaleB) green:(ga*scaleA +gb*scaleB) blue:(ba*scaleA +bb*scaleB) alpha:(aa*scaleA +ab*scaleB)];
+    
+    scaleA = 1 -scale;
+    scaleB = scale;
+    *mixColorB = [UIColor colorWithRed:(ra*scaleA +rb*scaleB) green:(ga*scaleA +gb*scaleB) blue:(ba*scaleA +bb*scaleB) alpha:(aa*scaleA +ab*scaleB)];
+}
+
+- (void)color:(UIColor *)color r:(CGFloat *)r g:(CGFloat *)g b:(CGFloat *)b a:(CGFloat *)a {
+    if (!color) {
+        return;
+    }
+    
+    CGColorRef colorCG = [color CGColor];
+    if (!colorCG) {
+        return;
+    }
+    
+    NSInteger componentsNum        = CGColorGetNumberOfComponents(colorCG);
+    const CGFloat *componentsArray = CGColorGetComponents(colorCG);
+    
+    if (componentsNum == 0) {
+        
+    }
+    else if (componentsNum == 2) {
+        *r = componentsArray[0];
+        *g = componentsArray[0];
+        *b = componentsArray[0];
+        *a = componentsArray[1];
+    }
+    else if (componentsNum == 4) {
+        
+        *r = componentsArray[0];
+        *g = componentsArray[1];
+        *b = componentsArray[2];
+        *a = componentsArray[3];
+    }
+    
+    // NSLog(@"r: %f, g: %f, b: %f, a: %f, ", *r, *g, *b, *a);
 }
 
 @end

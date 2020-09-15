@@ -36,16 +36,17 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 
 @property (nonatomic        ) CGFloat        originX;// bt距离边界的最小间隔
 
-@property (nonatomic, strong) UIFont         * btTitleNFont;
+@property (nonatomic, copy  ) UIFont         * btTitleNFont;
 
 /**
 设置btTitleSFont的话, titleArray最好不要太多, 否则滑动的时候UI.frame变化尺寸比较大影响效果
 */
-@property (nonatomic, strong) UIFont         * btTitleSFont;
+@property (nonatomic, copy  ) UIFont         * btTitleSFont;
 
-@property (nonatomic, strong) UIColor        * btTitleNColor;
-@property (nonatomic, strong) UIColor        * btTitleSColor;
-@property (nonatomic, strong) UIColor        * lineColor;
+@property (nonatomic, copy  ) UIColor        * btTitleNColor;
+@property (nonatomic, copy  ) UIColor        * btTitleSColor;
+@property (nonatomic        ) BOOL           btTitleColorGradualChange; // 标题颜色渐变
+@property (nonatomic, copy  ) UIColor        * lineColor;
 
 @property (nonatomic        ) UIEdgeInsets   btContentEdgeInsets;
 @property (nonatomic        ) CGFloat        lineMoveX;// 线条移动的范围
