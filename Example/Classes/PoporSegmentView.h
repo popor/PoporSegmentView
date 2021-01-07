@@ -34,14 +34,10 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 // 与之联动的外部UISrollView.
 @property (nonatomic, weak  ) UIScrollView   * weakLinkSV; // 不可以为空
 
-@property (nonatomic        ) CGFloat        originX;// bt距离边界的最小间隔
 
-@property (nonatomic, copy  ) UIFont         * btTitleNFont;
 
-/**
-设置btTitleSFont的话, titleArray最好不要太多, 否则滑动的时候UI.frame变化尺寸比较大影响效果
-*/
-@property (nonatomic, copy  ) UIFont         * btTitleSFont;
+@property (nonatomic, copy  ) UIFont         * btTitleFont;
+@property (nonatomic        ) CGFloat        btTitleFontScale; // 默认为0, 推荐在0.05 ~ 0.1 或者 -0.05 ~ -0.1
 
 @property (nonatomic, copy  ) UIColor        * btTitleNColor;
 @property (nonatomic, copy  ) UIColor        * btTitleSColor;
@@ -51,12 +47,35 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 @property (nonatomic        ) UIEdgeInsets   btContentEdgeInsets;
 @property (nonatomic        ) CGFloat        lineMoveX;// 线条移动的范围
 
+//.. 目前先处理渐变色 ..................................................................................
+// 背景色1, 采用image方式
+@property (nonatomic, copy  ) UIImage * btBgImageN;
+@property (nonatomic, copy  ) UIImage * btBgImageS;
+
+// 背景色2, 采用imageColor方式, 还未开发
+@property (nonatomic, copy  ) UIColor * btBgImageColorN0;
+@property (nonatomic, copy  ) UIColor * btBgImageColorS0;
+
+// 背景色3, 采用imageColor渐变方式
+@property (nonatomic, copy  ) UIColor * btBgImageColorN1;
+@property (nonatomic, copy  ) UIColor * btBgImageColorN2;
+@property (nonatomic, copy  ) UIColor * btBgImageColorS1;
+@property (nonatomic, copy  ) UIColor * btBgImageColorS2;
+
+//....................................................................................
+@property (nonatomic        ) CGFloat   originX;// bt距离边界的最小间隔
+@property (nonatomic        ) CGFloat   btsGap;// bt之间的间隔, 目前只针对PoporSegmentViewTypeViewAuto.
+
+//....................................................................................
+@property (nonatomic        ) CGFloat   btHeight;
+@property (nonatomic        ) CGFloat   btCornerRadius;
+
 // 由于采用的绝对布局,所以不是和bt的相对参数
-@property (nonatomic        ) CGFloat        titleLineBottom; // lineBottom之间的间距: 默认2
-@property (nonatomic        ) CGFloat        titleLineHeight; // 默认2
+@property (nonatomic        ) CGFloat   titleLineBottom; // lineBottom之间的间距: 默认2
+@property (nonatomic        ) CGFloat   titleLineHeight; // 默认2
 
 // titleLine 固定宽度
-@property (nonatomic        ) CGFloat        lineWidth;
+@property (nonatomic        ) CGFloat   lineWidth;
 
 @property (nonatomic, copy  ) BlockP_PoporSegmentViewButton titleBtClickBlock;
 
@@ -90,6 +109,9 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
  允许外部控制lineView滑动到某个bt下面, 假如外部修改过, 那么内部不再主动修改.
  */
 - (void)updateLineViewToBT:(UIButton *)bt;
+
+// 先设置normal的为select, 然后再将调换
+//- (void)fixBtWidthNormalFont:(UIFont *)normalFont selectFont:(UIFont *)selectFont;
 
 @end
 

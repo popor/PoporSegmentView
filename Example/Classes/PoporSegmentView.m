@@ -11,8 +11,6 @@
 #import <Masonry/Masonry.h>
 #import <PoporMasonry/PoporMasonry.h>
 
-#define ANIMATION_DURATION 0.15
-
 @interface PoporSegmentView ()
 
 @property (nonatomic        ) BOOL titleLineLock;
@@ -41,7 +39,7 @@
         _btTitleNColor     = [UIColor lightGrayColor];
         _btTitleSColor     = [UIColor blackColor];
         _lineColor         = [UIColor blackColor];
-        _btTitleNFont      = [UIFont systemFontOfSize:15];
+        _btTitleFont       = [UIFont systemFontOfSize:15];
         _originX           = 0;
         _lineWidth         = 20;
         _lineWidthFlexible = NO;
@@ -86,25 +84,38 @@
             break;
     }
     
+    //self.backgroundColor = UIColor.redColor;
     self.btArray = [NSMutableArray<UIButton *> new];
     for (int i = 0; i < self.titleArray.count; i ++) {
         UIButton * btn = [UIButton buttonWithType:UIButtonTypeCustom];
         //btn.backgroundColor = [UIColor brownColor];
-        btn.tag        = i;
-        if (i == 0) {
-            if (self.btTitleSFont) {
-                btn.titleLabel.font = self.btTitleSFont;
-            } else {
-                btn.titleLabel.font = self.btTitleNFont;
+        
+        if (self.btBgImageN) {
+            [btn setBackgroundImage:self.btBgImageN forState:UIControlStateNormal];
+            if (self.btBgImageS) {
+                [btn setBackgroundImage:self.btBgImageS forState:UIControlStateSelected];
             }
-        } else {
-            btn.titleLabel.font = self.btTitleNFont;
         }
         
-        [btn setTitle:self.titleArray[i] forState:UIControlStateNormal];
+        if (self.btCornerRadius > 0) {
+            btn.layer.cornerRadius  = self.btCornerRadius;
+            btn.layer.masksToBounds = YES;
+        }
+        
+        btn.tag = i;
+        NSString * title = self.titleArray[i];
+        
+        [btn setTitle:title forState:UIControlStateNormal];
+        btn.titleLabel.font = self.btTitleFont;
+        
         if (self.btTitleColorGradualChange) {
             if (i == 0) {
-                [btn setTitleColor:self.btTitleSColor forState:UIControlStateNormal];
+                if (self.btTitleSColor) {
+                    [btn setTitleColor:self.btTitleSColor forState:UIControlStateNormal];
+                } else {
+                    [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
+                }
+                
             } else {
                 [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
             }
@@ -112,9 +123,6 @@
             [btn setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
             [btn setTitleColor:self.btTitleSColor forState:UIControlStateSelected];
         }
-        
-        // [btn setBackgroundImage:[UIImage imageFromColor:[UIColor grayColor] size:CGSizeMake(1, 1)] forState:UIControlStateNormal];
-        //[btn setBackgroundColor:[UIColor brownColor]];
         
         if (!UIEdgeInsetsEqualToEdgeInsets(self.btContentEdgeInsets, UIEdgeInsetsZero)) {
             btn.contentEdgeInsets = self.btContentEdgeInsets;
@@ -146,6 +154,16 @@
         
         [btn.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
         btn.titleLabel.numberOfLines =0;
+        
+        [btn.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(0);
+        }];
+        
+        if (i == 0) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self updateCurrentBTColorPage_Bt:btn];
+            });
+        }
     }
     if (!self.titleLineView) {
         UIView * oneV = [[UIView alloc] init];
@@ -181,6 +199,7 @@
     if (self.btArray.count == 0) {
         return;
     }
+    
     switch (self.style) {
         case PoporSegmentViewTypeView : {
             //平分宽度,不会自适应
@@ -192,25 +211,46 @@
                 UIButton * firstBT = self.btArray[0];
                 UIButton * lastBT  = self.btArray.lastObject;
                 [firstBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(0);
                     make.left.mas_equalTo(self.originX);
-                    make.bottom.mas_equalTo(0);
+                    
+                    if (self.btHeight > 0) {
+                        make.height.mas_equalTo(self.btHeight);
+                        make.centerY.mas_equalTo(0);
+                    } else {
+                        make.top.mas_equalTo(0);
+                        make.centerY.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                    }
                     
                 }];
                 [lastBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(0);
                     make.left.mas_equalTo(firstBT.mas_right);
-                    make.bottom.mas_equalTo(0);
                     make.right.mas_equalTo(-self.originX);
                     make.width.mas_equalTo(firstBT.mas_width);
+                    
+                    if (self.btHeight > 0) {
+                        make.height.mas_equalTo(self.btHeight);
+                        make.centerY.mas_equalTo(0);
+                    } else {
+                        make.top.mas_equalTo(0);
+                        make.centerY.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                    }
                 }];
             } else if (self.titleArray.count > 2) {
                 UIButton * firstBT = self.btArray[0];
                 UIButton * lastBT  = self.btArray.lastObject;
                 [firstBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(0);
                     make.left.mas_equalTo(self.originX);
-                    make.bottom.mas_equalTo(0);
+                    
+                    if (self.btHeight > 0) {
+                        make.height.mas_equalTo(self.btHeight);
+                        make.centerY.mas_equalTo(0);
+                    } else {
+                        make.top.mas_equalTo(0);
+                        make.centerY.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                    }
                     
                 }];
                 
@@ -219,34 +259,102 @@
                 for (int i = 1; i<self.btArray.count - 1; i++) {
                     tempBT = self.btArray[i];
                     [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.top.mas_equalTo(0);
                         make.left.mas_equalTo(priorBT.mas_right);
-                        make.bottom.mas_equalTo(0);
                         
+                        if (self.btHeight > 0) {
+                            make.height.mas_equalTo(self.btHeight);
+                            make.centerY.mas_equalTo(0);
+                        } else {
+                            make.top.mas_equalTo(0);
+                            make.centerY.mas_equalTo(0);
+                            make.bottom.mas_equalTo(0);
+                        }
                     }];
                     priorBT = tempBT;
                 }
                 
                 [lastBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(0);
                     make.left.mas_equalTo(priorBT.mas_right);
-                    make.bottom.mas_equalTo(0);
                     make.right.mas_equalTo(-self.originX);
                     make.width.mas_equalTo(firstBT.mas_width);
+                    
+                    if (self.btHeight > 0) {
+                        make.height.mas_equalTo(self.btHeight);
+                        make.centerY.mas_equalTo(0);
+                    } else {
+                        make.top.mas_equalTo(0);
+                        make.centerY.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                    }
                 }];
             }
             break;
         }
         case PoporSegmentViewTypeViewAuto : {
             // 自适应宽度,只在屏幕范围内
-            for (int i = 0; i<self.btArray.count; i++) {
-                UIButton * tempBT = self.btArray[i];
-                [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(0);
-                    make.bottom.mas_equalTo(0);
-                }];
+            if (self.btsGap > 0) {
+                {
+                    UIView * spaceOneView = UIView.new;
+                    UIView * spaceTwoView = UIView.new;
+                    [self addSubview:spaceTwoView];
+                    [self addSubview:spaceOneView];
+                    
+                    [spaceOneView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.mas_equalTo(0);
+                        make.width.equalTo(spaceTwoView);
+                        make.centerY.equalTo(self);
+                    }];
+                    
+                    [spaceTwoView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.centerY.equalTo(self);
+                        make.right.mas_equalTo(0);
+                    }];
+                    
+                    UIButton * lastBT;
+                    for (int i = 0; i<self.btArray.count; i++) {
+                        UIButton * tempBT = self.btArray[i];
+                        [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                            if (self.btHeight > 0) {
+                                make.height.mas_equalTo(self.btHeight);
+                                make.centerY.mas_equalTo(0);
+                            } else {
+                                make.top.mas_equalTo(0);
+                                make.centerY.mas_equalTo(0);
+                                make.bottom.mas_equalTo(0);
+                            }
+                            if (lastBT) {
+                                make.left.mas_equalTo(lastBT.mas_right).mas_offset(self.btsGap);
+                            }
+                            
+                            if (i == 0) {
+                                make.left.mas_equalTo(spaceOneView.mas_right);
+                            }
+                            if (i == self.btArray.count -1) {
+                                make.right.mas_equalTo(spaceTwoView.mas_left);
+                            }
+                        }];
+                        lastBT = tempBT;
+                    }
+                }
+                
+            } else {
+                for (int i = 0; i<self.btArray.count; i++) {
+                    UIButton * tempBT = self.btArray[i];
+                    [tempBT mas_makeConstraints:^(MASConstraintMaker *make) {
+                        
+                        if (self.btHeight > 0) {
+                            make.height.mas_equalTo(self.btHeight);
+                            make.centerY.mas_equalTo(0);
+                        } else {
+                            make.top.mas_equalTo(0);
+                            make.centerY.mas_equalTo(0);
+                            make.bottom.mas_equalTo(0);
+                        }
+                    }];
+                }
+                
+                [self masSpacingHorizontallyWith:self.btArray];
             }
-            [self masSpacingHorizontallyWith:self.btArray];
             
             break;
         }
@@ -260,20 +368,32 @@
             
             UIButton * priorBT = self.btArray.firstObject;
             [priorBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(0);
-                make.bottom.mas_equalTo(0);
                 make.left.mas_equalTo(0);
-                make.centerY.mas_equalTo(0);
+                
+                if (self.btHeight > 0) {
+                    make.height.mas_equalTo(self.btHeight);
+                    make.centerY.mas_equalTo(0);
+                } else {
+                    make.top.mas_equalTo(0);
+                    make.centerY.mas_equalTo(0);
+                    make.bottom.mas_equalTo(0);
+                }
             }];
             
             UIButton * oneBT;
             for (int i = 1; i<self.btArray.count; i++) {
                 oneBT = self.btArray[i];
                 [oneBT mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.mas_equalTo(0);
-                    make.bottom.mas_equalTo(0);
                     make.left.mas_equalTo(priorBT.mas_right);
-                    make.centerY.mas_equalTo(0);
+                    
+                    if (self.btHeight > 0) {
+                        make.height.mas_equalTo(self.btHeight);
+                        make.centerY.mas_equalTo(0);
+                    } else {
+                        make.top.mas_equalTo(0);
+                        make.centerY.mas_equalTo(0);
+                        make.bottom.mas_equalTo(0);
+                    }
                 }];
                 priorBT = oneBT;
             }
@@ -341,7 +461,6 @@
                     self.currentBT   = self.btArray[self.currentPage];
                     
                     [self updateCurrentBTColorPage_Bt:self.currentBT];
-                    //[self updateTitleLineView_btSV_Bt:self.currentBT];
                     
                     [self scrollViewDidScroll:scrollView];
                     
@@ -355,16 +474,8 @@
                     //return;
                 }
             }
-            if (self.btTitleColorGradualChange) {
-                UIColor * mixColorA;
-                UIColor * mixColorB;
-                
-                [self mixColorA:self.btTitleNColor colorB:self.btTitleSColor scale:moveS mixColorA:&mixColorA mixColorB:&mixColorB];
-                [self.currentBT setTitleColor:mixColorA forState:UIControlStateNormal];
-                [nextBT setTitleColor:mixColorB forState:UIControlStateNormal];
-            } else {
-                
-            }
+            
+            [self updateBtUiScale:moveS currentBT:self.currentBT nextBT:nextBT];
             
             // ------ 下划线 ------ //if (moveS > 1 && scrollView.isDragging) { return; }
             if (self.isLineWidthFlexible) {
@@ -405,6 +516,84 @@
         }
     }
     
+}
+
+- (void)updateBtUiScale:(CGFloat)moveS currentBT:(UIButton *)cBT nextBT:(UIButton *)nextBT {
+    //NSLog(@"c.title:%@ , n.title:%@, moveS:%f", cBT.titleLabel.text, nextBT.titleLabel.text, moveS);
+    
+    if (self.btTitleFontScale != 0) { // title scale
+        if (nextBT) {
+            CGFloat scale1 = 1.0 +self.btTitleFontScale -self.btTitleFontScale*moveS;
+            CGFloat scale2 = 1.0 +self.btTitleFontScale*moveS;
+            cBT.titleLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale1, scale1);
+            nextBT.titleLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale2, scale2);
+        } else {
+            CGFloat scale1 = 1.0 +self.btTitleFontScale*moveS;
+            cBT.titleLabel.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale1, scale1);
+        }
+    }
+    
+    {   // title color
+        if (nextBT) {
+            UIColor * mixColorA;
+            UIColor * mixColorB;
+            [self mixColorA:self.btTitleNColor colorB:self.btTitleSColor scale:moveS mixColorA:&mixColorA mixColorB:&mixColorB];
+            [cBT    setTitleColor:mixColorA forState:UIControlStateNormal];
+            [nextBT setTitleColor:mixColorB forState:UIControlStateNormal];
+        } else {
+            [cBT    setTitleColor:self.btTitleSColor forState:UIControlStateNormal];
+        }
+    }
+    
+    // bt bg color
+    if (self.btBgImageColorN0 && self.btBgImageColorS0) {
+        
+        if (nextBT) {
+            UIColor * mixColorN0;
+            UIColor * mixColorS0;
+            
+            [self mixColorA:self.btBgImageColorN0 colorB:self.btBgImageColorS0 scale:moveS mixColorA:&mixColorS0 mixColorB:&mixColorN0];
+            
+            UIImage * imageS = [[self class] imageFromColor:mixColorS0 size:CGSizeMake(1, 1) corner:0 corners:UIRectCornerTopLeft borderWidth:0 borderColor:nil borderInset:UIEdgeInsetsZero scale:0];
+            UIImage * imageN = [[self class] imageFromColor:mixColorN0 size:CGSizeMake(1, 1) corner:0 corners:UIRectCornerTopLeft borderWidth:0 borderColor:nil borderInset:UIEdgeInsetsZero scale:0];
+            [cBT    setBackgroundImage:imageS forState:UIControlStateNormal];
+            [nextBT setBackgroundImage:imageN forState:UIControlStateNormal];
+        } else {
+            UIImage * imageS = [[self class] imageFromColor:self.btBgImageColorS0 size:CGSizeMake(1, 1) corner:0 corners:UIRectCornerTopLeft borderWidth:0 borderColor:nil borderInset:UIEdgeInsetsZero scale:0];
+            [cBT    setBackgroundImage:imageS forState:UIControlStateNormal];
+        }
+    }
+    else if (self.btBgImageColorN1 && self.btBgImageColorN2 && self.btBgImageColorS1 && self.btBgImageColorS2) {
+        
+        if (nextBT) {
+            UIColor * mixColorN1;
+            UIColor * mixColorN2;
+            UIColor * mixColorS1;
+            UIColor * mixColorS2;
+            
+            [self mixColorA:self.btBgImageColorN1 colorB:self.btBgImageColorS1 scale:moveS mixColorA:&mixColorS1 mixColorB:&mixColorN1];
+            [self mixColorA:self.btBgImageColorN2 colorB:self.btBgImageColorS2 scale:moveS mixColorA:&mixColorS2 mixColorB:&mixColorN2];
+            
+            UIImage * imageS = [[self class] gradientImageWithBounds:CGRectMake(0, 0, 10, 1) andColors:@[mixColorS1, mixColorS2] gradientHorizon:YES];
+            UIImage * imageN = [[self class] gradientImageWithBounds:CGRectMake(0, 0, 10, 1) andColors:@[mixColorN1, mixColorN2] gradientHorizon:YES];
+            
+            [cBT    setBackgroundImage:imageS forState:UIControlStateNormal];
+            [nextBT setBackgroundImage:imageN forState:UIControlStateNormal];
+        } else {
+            UIImage * imageS = [[self class] gradientImageWithBounds:CGRectMake(0, 0, 10, 1) andColors:@[self.btBgImageColorS1, self.btBgImageColorS2] gradientHorizon:YES];
+            [cBT    setBackgroundImage:imageS forState:UIControlStateNormal];
+        }
+    }
+    else if (self.btBgImageN && self.btBgImageS) {
+        if (moveS >= 1) {
+            if (cBT) {
+                [cBT setBackgroundImage:self.btBgImageN forState:UIControlStateNormal];
+            }
+            if (nextBT) {
+                [nextBT setBackgroundImage:self.btBgImageS forState:UIControlStateNormal];
+            }
+        }
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -483,34 +672,17 @@
 }
 
 - (void)updateCurrentBTColorPage_Bt:(UIButton *)bt {
-    if (self.btTitleColorGradualChange) {
-        if (self.currentBT) { // old
-            [self.currentBT setTitleColor:self.btTitleNColor forState:UIControlStateNormal];
-            if (self.btTitleSFont) {
-                self.currentBT.titleLabel.font = self.btTitleNFont;
-            }
-        }
-        // new
+    if (!self.currentBT) {
         self.currentBT = bt;
-        [self.currentBT setTitleColor:self.btTitleSColor forState:UIControlStateNormal];
-        if (self.btTitleSFont) {
-            self.currentBT.titleLabel.font = self.btTitleSFont;
-        }
+        [self updateBtUiScale:1 currentBT:self.currentBT nextBT:nil];
     } else {
-        if (self.currentBT) { // old
-            self.currentBT.selected = NO;
-            if (self.btTitleSFont) {
-                self.currentBT.titleLabel.font = self.btTitleNFont;
-            }
-        }
-        // new
-        bt.selected = YES;
-        self.currentBT = bt;
-        if (self.btTitleSFont) {
-            self.currentBT.titleLabel.font = self.btTitleSFont;
+        if (self.currentBT != bt) {
+            [self updateBtUiScale:1 currentBT:self.currentBT nextBT:bt];
+            self.currentBT = bt;
+        } else {
+            [self updateBtUiScale:1 currentBT:self.currentBT nextBT:nil];
         }
     }
-    
     // 修改 page
     self.currentPage = (int)bt.tag;
 }
@@ -595,6 +767,108 @@
     }
     
     // NSLog(@"r: %f, g: %f, b: %f, a: %f, ", *r, *g, *b, *a);
+}
+
+
+/**
+ *  获取矩形的渐变色的UIImage(此函数还不够完善)
+ *
+ *  @param bounds          UIImage的bounds
+ *  @param colors          渐变色数组，可以设置两种颜色
+ *  @param gradientHorizon 渐变的方式：0--->从上到下   1--->从左到右
+ *
+ *  @return 渐变色的UIImage
+ */
++ (UIImage*)gradientImageWithBounds:(CGRect)bounds andColors:(NSArray*)colors gradientHorizon:(BOOL)gradientHorizon {
+    CGPoint start;
+    CGPoint end;
+    
+    if (gradientHorizon) {
+        start = CGPointMake(0.0, 0.0);
+        end = CGPointMake(bounds.size.width, 0.0);
+    }else{
+        start = CGPointMake(0.0, 0.0);
+        end = CGPointMake(0.0, bounds.size.height);
+    }
+    
+    UIImage *image = [self gradientImageWithBounds:bounds andColors:colors addStartPoint:start addEndPoint:end];
+    return image;
+}
+
++ (UIImage*)gradientImageWithBounds:(CGRect)bounds andColors:(NSArray*)colors addStartPoint:(CGPoint)startPoint addEndPoint:(CGPoint)endPoint {
+    NSMutableArray *ar = [NSMutableArray array];
+    
+    for(UIColor *c in colors) {
+        [ar addObject:(id)c.CGColor];
+    }
+    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, [UIScreen mainScreen].scale);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+    CGColorSpaceRef colorSpace = CGColorGetColorSpace([[colors lastObject] CGColor]);
+    CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (CFArrayRef)ar, NULL);
+    
+    CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    CGGradientRelease(gradient);
+    CGContextRestoreGState(context);
+    CGColorSpaceRelease(colorSpace);
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+// 以后图片的scale变为1.0, 尺寸有size决定, 不再自作主张.
++ (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size corner:(CGFloat)corner corners:(UIRectCorner)corners borderWidth:(CGFloat)borderWidth borderColor:(UIColor * _Nullable)borderColor borderInset:(UIEdgeInsets)borderInset scale:(CGFloat)scale {
+    
+    if (scale <= 0) {
+        scale = [UIScreen mainScreen].scale;
+    }
+    
+    CGFloat w = size.width;
+    CGFloat h = size.height;
+    //CGFloat scale = [UIScreen mainScreen].scale;
+    // 防止圆角半径小于0，或者大于宽/高中较小值的一半。
+    if (corner < 0){
+        corner = 0;
+    } else if (corner > MIN(w, h)){
+        corner = MIN(w, h) / 2.0;
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, scale);
+    
+    UIBezierPath *path;// = [UIBezierPath bezierPath];
+    // 添加圆到path
+    CGRect rect;
+    
+    // UIEdgeInsetsZero的情况
+    if (UIEdgeInsetsEqualToEdgeInsets(borderInset, UIEdgeInsetsZero)) {
+        rect = CGRectMake(0, 0, w, h);
+    } else {
+        rect = CGRectMake(borderWidth*scale/2.0 + borderInset.left, // 加上左边的set
+                          borderWidth*scale/2.0 + borderInset.top,  // 加上上面的set
+                          w - borderWidth*scale - borderInset.left - borderInset.right,   // 减去左边右边的set
+                          h - borderWidth*scale - borderInset.top  - borderInset.bottom);// 减去上边下边的set
+    }
+    CGFloat radii = corner-borderWidth;
+    if (radii > 0) {
+        path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:CGSizeMake(radii, radii)];
+    } else {
+        path = [UIBezierPath bezierPathWithRect:rect];
+    }
+    
+    
+    // 设置描边宽度（为了让描边看上去更清楚）
+    [path setLineWidth:borderWidth];
+    //设置颜色（颜色设置也可以放在最上面，只要在绘制前都可以）
+    [borderColor setStroke]; // 描边
+    [color setFill];         // 填充
+    [path stroke];           // 描边
+    [path fill];             // 填充
+    
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 @end
