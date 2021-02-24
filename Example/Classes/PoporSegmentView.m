@@ -18,6 +18,7 @@
 @property (nonatomic, getter=isUpdateCurrentBT_outer) BOOL updateCurrentBT_outer; // 是否外部修改过 当前选择的 BT
 
 @property (nonatomic        ) BOOL ignoreUpdateBtSvConentOffset; // 是否 临时忽略
+@property (nonatomic        ) NSInteger updateFirstBtLineTime;
 @end
 
 @implementation PoporSegmentView
@@ -45,8 +46,8 @@
         _lineWidthFlexible = NO;
         _lineWidthScale    = 0;
         
-        _titleLineHeight   = 2;
-        _titleLineBottom   = 2;
+        _lineHeight   = 2;
+        _lineBottom   = 2;
         
     }
     return self;
@@ -165,27 +166,30 @@
             });
         }
     }
-    if (!self.titleLineView) {
-        UIView * oneV = [[UIView alloc] init];
-        oneV.alpha = 0; // 先隐藏, 不然动画效果不好看
-        self.titleLineView = oneV;
+    if (!self.titleLineIV) {
+        UIImageView * oneIV = [[UIImageView alloc] init];
+        oneIV.alpha = 0; // 先隐藏, 不然动画效果不好看
+        self.titleLineIV = oneIV;
         
-        oneV.backgroundColor = self.lineColor;
-        
+        if (self.lineImage) {
+            oneIV.image = self.lineImage;
+        } else if (self.lineColor) {
+            oneIV.backgroundColor = self.lineColor;
+        }
         switch (self.style) {
             case PoporSegmentViewTypeView : {
                 //平分宽度,不会自适应
-                [self addSubview:oneV];
+                [self addSubview:oneIV];
                 break;
             }
             case PoporSegmentViewTypeViewAuto : {
                 // 自适应宽度,只在屏幕范围内
-                [self addSubview:oneV];
+                [self addSubview:oneIV];
                 break;
             }
             case PoporSegmentViewTypeScrollView : {
                 // 自适应宽度,会滑动
-                [self.btSV addSubview:oneV];
+                [self.btSV addSubview:oneIV];
                 break;
             }
             default:
@@ -411,17 +415,14 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        float height             = self.titleLineHeight;
+        float height             = self.lineHeight;
         float width              = self.lineWidth;
-        float y                  = self.frame.size.height - self.titleLineBottom - height;
-        self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x +self.lineMoveX, y, width, height);
+        float y                  = self.frame.size.height - self.lineBottom - height;
+        self.titleLineIV.frame = CGRectMake(self.titleLineIV.frame.origin.x +self.lineMoveX, y, width, height);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (!self.isUpdateCurrentBT_outer && !self.currentBT) {
-                [self updateLineViewToBT:self.btArray.firstObject];
-            }
             [UIView animateWithDuration:0.15 animations:^{
-                self.titleLineView.alpha = 1;
+                self.titleLineIV.alpha = 1;
             }];
         });
     });
@@ -482,14 +483,14 @@
                 //NSLog(@"设置动态下划线宽度");
                 float width = (1.0-moveS)*self.currentBT.frame.size.width + moveS*nextBT.frame.size.width;
                 CGFloat width_new = width * self.lineWidthScale;
-                self.titleLineView.frame = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width_new, self.titleLineView.frame.size.height);
+                self.titleLineIV.frame = CGRectMake(self.titleLineIV.frame.origin.x, self.titleLineIV.frame.origin.y, width_new, self.titleLineIV.frame.size.height);
             }
             
             {
                 //NSLog(@"设置下划线中心");
                 float moveMaxWidth = self.currentBT.center.x - nextBT.center.x;
                 float centerX      = self.currentBT.center.x - moveMaxWidth*moveS;
-                self.titleLineView.center = CGPointMake(centerX +self.lineMoveX, self.titleLineView.center.y);
+                self.titleLineIV.center = CGPointMake(centerX +self.lineMoveX, self.titleLineIV.center.y);
             }
             
             // ------ 检查nextBT是否在可见范围 ------
@@ -663,6 +664,35 @@
     self.updateCurrentBT_outer = YES;
 }
 
+// 假如异步加载segmentView的话, lineView时常不对位, 可以使用此方法纠正, bt为空的话,则为第一个
+- (void)asyncUpdateLineViewToBt:(UIButton * _Nullable)bt {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.updateFirstBtLineTime = 0;
+        [self asyncUpdateLineViewToBt_delay:bt];
+    });
+}
+
+- (void)asyncUpdateLineViewToBt_delay:(UIButton * _Nullable)bt {
+    self.updateFirstBtLineTime ++;
+    if (self.updateFirstBtLineTime > 6) {
+        return;
+    }
+    if (!bt) {
+        bt = self.btArray.firstObject;
+    }
+    if (!bt) {
+        return;
+    }
+    
+    if (bt.frame.size.width != 0) {
+        [self updateLineViewToBT:bt];
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self asyncUpdateLineViewToBt_delay:bt];
+        });
+    }
+}
+
 - (void)inner__updateLineViewToBT:(UIButton *)bt {
     //NSLog(@"___ self.currentBT.title: %@", self.currentBT.titleLabel.text);
     //NSLog(@"___ bt.title: %@", bt.titleLabel.text);
@@ -691,10 +721,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isLineWidthFlexible) {
             CGFloat width = bt.frame.size.width*self.lineWidthScale;
-            self.titleLineView.frame  = CGRectMake(self.titleLineView.frame.origin.x, self.titleLineView.frame.origin.y, width, self.titleLineView.frame.size.height);
-            self.titleLineView.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineView.center.y);
+            self.titleLineIV.frame  = CGRectMake(self.titleLineIV.frame.origin.x, self.titleLineIV.frame.origin.y, width, self.titleLineIV.frame.size.height);
+            self.titleLineIV.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineIV.center.y);
         }else{
-            self.titleLineView.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineView.center.y);
+            self.titleLineIV.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineIV.center.y);
         }
         
         switch (self.style) {
@@ -841,14 +871,17 @@
     CGRect rect;
     
     // UIEdgeInsetsZero的情况
-    if (UIEdgeInsetsEqualToEdgeInsets(borderInset, UIEdgeInsetsZero)) {
-        rect = CGRectMake(0, 0, w, h);
-    } else {
-        rect = CGRectMake(borderWidth*scale/2.0 + borderInset.left, // 加上左边的set
-                          borderWidth*scale/2.0 + borderInset.top,  // 加上上面的set
-                          w - borderWidth*scale - borderInset.left - borderInset.right,   // 减去左边右边的set
-                          h - borderWidth*scale - borderInset.top  - borderInset.bottom);// 减去上边下边的set
-    }
+    // UIEdgeInsetsZero的情况
+    // rect = CGRectMake(borderWidth*scale/2.0 + borderInset.left, // 加上左边的set
+    //                   borderWidth*scale/2.0 + borderInset.top,  // 加上上面的set
+    //                   w - borderWidth*scale - borderInset.left - borderInset.right,   // 减去左边右边的set
+    //                   h - borderWidth*scale - borderInset.top  - borderInset.bottom);// 减去上边下边的set
+    
+    rect = CGRectMake(borderWidth + borderInset.left, // 加上左边的set
+                      borderWidth + borderInset.top,  // 加上上面的set
+                      w - borderWidth*2 - borderInset.left - borderInset.right,   // 减去左边右边的set
+                      h - borderWidth*2 - borderInset.top  - borderInset.bottom);// 减去上边下边的set
+    
     CGFloat radii = corner-borderWidth;
     if (radii > 0) {
         path = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:corners cornerRadii:CGSizeMake(radii, radii)];

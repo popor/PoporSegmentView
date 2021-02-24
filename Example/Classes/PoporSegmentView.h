@@ -42,7 +42,6 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 @property (nonatomic, copy  ) UIColor        * btTitleNColor;
 @property (nonatomic, copy  ) UIColor        * btTitleSColor;
 @property (nonatomic        ) BOOL           btTitleColorGradualChange; // 标题颜色渐变
-@property (nonatomic, copy  ) UIColor        * lineColor;
 
 @property (nonatomic        ) UIEdgeInsets   btContentEdgeInsets;
 @property (nonatomic        ) CGFloat        lineMoveX;// 线条移动的范围
@@ -71,11 +70,13 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 @property (nonatomic        ) CGFloat   btCornerRadius;
 
 // 由于采用的绝对布局,所以不是和bt的相对参数
-@property (nonatomic        ) CGFloat   titleLineBottom; // lineBottom之间的间距: 默认2
-@property (nonatomic        ) CGFloat   titleLineHeight; // 默认2
+@property (nonatomic        ) CGFloat   lineBottom; // lineBottom之间的间距: 默认2
+@property (nonatomic        ) CGFloat   lineHeight; // 默认2
 
 // titleLine 固定宽度
 @property (nonatomic        ) CGFloat   lineWidth;
+@property (nonatomic, strong) UIImage * lineImage; // 假如设定了lineImage, 则进行填充.拉伸显示
+@property (nonatomic, copy  ) UIColor * lineColor;
 
 @property (nonatomic, copy  ) BlockP_PoporSegmentViewButton titleBtClickBlock;
 
@@ -93,7 +94,7 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 @property (nonatomic, strong) UIScrollView   * btSV;
 @property (nonatomic, strong) NSMutableArray<UIButton *> * btArray;
 @property (nonatomic, weak  ) UIButton       * currentBT;
-@property (nonatomic, strong) UIView         * titleLineView;
+@property (nonatomic, strong) UIImageView    * titleLineIV;
 @property (nonatomic        ) NSInteger      currentPage;
 
 - (id)initWithStyle:(PoporSegmentViewType)style NS_DESIGNATED_INITIALIZER;
@@ -106,9 +107,12 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView;
 
 /**
- 允许外部控制lineView滑动到某个bt下面, 假如外部修改过, 那么内部不再主动修改.
+ 允许外部控制lineView滑动到某个bt下面, 假如外部修改过, 那么内部不再主动修改, 该方法不保证准确
  */
-- (void)updateLineViewToBT:(UIButton *)bt;
+- (void)updateLineViewToBT:(UIButton * _Nullable)bt;
+
+// 假如异步加载segmentView的话, lineView时常不对位, 可以使用此方法纠正, bt为空的话,则为第一个
+- (void)asyncUpdateLineViewToBt:(UIButton * _Nullable)bt;
 
 // 先设置normal的为select, 然后再将调换
 //- (void)fixBtWidthNormalFont:(UIFont *)normalFont selectFont:(UIFont *)selectFont;
