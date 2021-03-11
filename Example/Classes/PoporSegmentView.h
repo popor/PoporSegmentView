@@ -117,6 +117,14 @@ typedef void(^BlockP_PoporSegmentViewButton) (UIButton * bt);
 // 先设置normal的为select, 然后再将调换
 //- (void)fixBtWidthNormalFont:(UIFont *)normalFont selectFont:(UIFont *)selectFont;
 
+/**
+ *  @brief 外部自定义 滑动事件
+ *
+ *  @param end 假如结束, 那么越界动画会自动恢复位置.
+ *
+ */
+- (void)scrollX:(CGFloat)scrollX pageWidth:(CGFloat)pageWidth end:(BOOL)end;
+
 @end
 
 NS_ASSUME_NONNULL_END

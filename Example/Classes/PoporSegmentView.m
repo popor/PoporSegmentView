@@ -415,9 +415,18 @@
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        float height             = self.lineHeight;
-        float width              = self.lineWidth;
-        float y                  = self.frame.size.height - self.lineBottom - height;
+        
+        CGFloat width;
+        CGFloat height;
+        if (self.lineImage) {
+            width  = self.lineImage.size.width;
+            height = self.lineImage.size.height;
+        } else {
+            width  = self.lineWidth;
+            height = self.lineHeight;
+        }
+        CGFloat y = self.frame.size.height - self.lineBottom - height;
+        
         self.titleLineIV.frame = CGRectMake(self.titleLineIV.frame.origin.x +self.lineMoveX, y, width, height);
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -517,6 +526,83 @@
         }
     }
     
+}
+
+// 外部自定义 滑动事件
+- (void)scrollX:(CGFloat)scrollX pageWidth:(CGFloat)pageWidth end:(BOOL)end {
+    if (self.btArray.count <= 1) {
+        return;
+    }
+    CGFloat svOffX     = scrollX +pageWidth*self.currentPage;
+    CGFloat moveScale  = svOffX/pageWidth;
+    NSInteger nextPage = moveScale >= self.currentPage ? self.currentPage+1:self.currentPage-1;
+    
+    if ( scrollX == 0) {
+        [self titleBtnClick_animation:self.currentBT]; // 需要有一个过度动画
+        return;
+    }
+    
+    if (nextPage < 0 || nextPage >= self.titleArray.count) { //越界的动画
+        //NSLog(@"越界的动画");
+        float centerX;
+        if (end) {
+            centerX = self.currentBT.center.x;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.titleLineIV.center = CGPointMake(centerX +self.lineMoveX, self.titleLineIV.center.y);
+            }];
+        } else {
+            centerX = self.currentBT.center.x + self.currentBT.frame.size.width*(scrollX/pageWidth)*0.5;
+            self.titleLineIV.center = CGPointMake(centerX +self.lineMoveX, self.titleLineIV.center.y);
+        }
+        return;
+    }
+        
+    UIButton * nextBT = self.btArray[nextPage];
+    float moveS = fabs(moveScale - self.currentPage);
+    
+    if (moveS == 1) {
+        [self titleBtnClick_animation:nextBT]; // 需要有一个过度动画
+    }
+    
+    else {
+        [self updateBtUiScale:moveS currentBT:self.currentBT nextBT:nextBT];
+        
+        // ------ 下划线 ------ //if (moveS > 1 && scrollView.isDragging) { return; }
+        if (self.isLineWidthFlexible) {
+            //NSLog(@"设置动态下划线宽度");
+            float width = (1.0-moveS)*self.currentBT.frame.size.width + moveS*nextBT.frame.size.width;
+            CGFloat width_new = width * self.lineWidthScale;
+            self.titleLineIV.frame = CGRectMake(self.titleLineIV.frame.origin.x, self.titleLineIV.frame.origin.y, width_new, self.titleLineIV.frame.size.height);
+        }
+        
+        {
+            //NSLog(@"设置下划线中心");
+            float moveMaxWidth = self.currentBT.center.x - nextBT.center.x;
+            float centerX      = self.currentBT.center.x - moveMaxWidth*moveS;
+            self.titleLineIV.center = CGPointMake(centerX +self.lineMoveX, self.titleLineIV.center.y);
+        }
+        
+        // ------ 检查nextBT是否在可见范围 ------
+        if (!self.ignoreUpdateBtSvConentOffset) {
+            CGRect rect = CGRectMake(self.btSV.contentOffset.x, self.btSV.contentOffset.y, self.btSV.visibleSize.width, self.btSV.visibleSize.height);
+            if (!CGRectContainsRect(rect, nextBT.frame)) {
+                
+                self.ignoreUpdateBtSvConentOffset = YES;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.ignoreUpdateBtSvConentOffset = NO;
+                });
+                
+                // 文本长度超过满屏的暂不考虑
+                if (nextBT.frame.origin.x < self.btSV.contentOffset.x) { // 靠左
+                    [self.btSV setContentOffset:CGPointMake(nextBT.frame.origin.x -self.originX, nextBT.frame.origin.y) animated:YES];
+                } else { // 靠右
+                    [self.btSV setContentOffset:CGPointMake(CGRectGetMaxX(nextBT.frame) -self.btSV.frame.size.width +self.originX, nextBT.frame.origin.y) animated:YES];
+                }
+            }
+            
+        }
+    }
+
 }
 
 - (void)updateBtUiScale:(CGFloat)moveS currentBT:(UIButton *)cBT nextBT:(UIButton *)nextBT {
@@ -659,6 +745,28 @@
     }
 }
 
+// 带有动画的 点击事件
+- (void)titleBtnClick_animation:(UIButton *)bt {
+    // 处理点击事件
+    if (bt == self.currentBT) {
+        
+    } else {
+        if (self.titleBtClickBlock) {
+            self.titleBtClickBlock(bt);
+        }
+    }
+    
+    //self.titleLineLock = YES;
+    //[UIView animateWithDuration:0.3 animations:^{
+    [self updateCurrentBTColorPage_Bt:bt];
+    [self updateTitleLineView_btSV_Bt:bt duration:0.3];
+        
+    //} completion:^(BOOL finished) {
+    //    self.titleLineLock = NO;
+    //}];
+    
+}
+
 - (void)updateLineViewToBT:(UIButton *)bt {
     [self inner__updateLineViewToBT:bt];
     self.updateCurrentBT_outer = YES;
@@ -718,14 +826,22 @@
 }
 
 - (void)updateTitleLineView_btSV_Bt:(UIButton *)bt {
+    [self updateTitleLineView_btSV_Bt:bt duration:0];
+}
+
+- (void)updateTitleLineView_btSV_Bt:(UIButton *)bt duration:(CGFloat)duration {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.isLineWidthFlexible) {
-            CGFloat width = bt.frame.size.width*self.lineWidthScale;
-            self.titleLineIV.frame  = CGRectMake(self.titleLineIV.frame.origin.x, self.titleLineIV.frame.origin.y, width, self.titleLineIV.frame.size.height);
-            self.titleLineIV.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineIV.center.y);
-        }else{
-            self.titleLineIV.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineIV.center.y);
-        }
+        [UIView animateWithDuration:duration animations:^{
+            if (self.isLineWidthFlexible) {
+                CGFloat width = bt.frame.size.width*self.lineWidthScale;
+                self.titleLineIV.frame  = CGRectMake(self.titleLineIV.frame.origin.x, self.titleLineIV.frame.origin.y, width, self.titleLineIV.frame.size.height);
+                self.titleLineIV.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineIV.center.y);
+                //NSLog(@"point 1: %@", NSStringFromCGPoint(self.titleLineIV.center));
+            } else {
+                self.titleLineIV.center = CGPointMake(bt.center.x +self.lineMoveX, self.titleLineIV.center.y);
+                //NSLog(@"point 2: %@", NSStringFromCGPoint(self.titleLineIV.center));
+            }
+        }];
         
         switch (self.style) {
             case PoporSegmentViewTypeView : {
